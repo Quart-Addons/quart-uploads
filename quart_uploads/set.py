@@ -5,7 +5,7 @@ Defines the upload set class.
 """
 import os
 import posixpath
-from typing import Optional
+from typing import Optional, Union
 
 import aiofiles.os
 from quart import current_app, url_for
@@ -14,7 +14,7 @@ from werkzeug.utils import secure_filename
 
 from .exceptions import UploadNotAllowed
 from .file_ext import DEFAULTS
-from .utils import extension, lowercase_ext
+from .utils import extension, lowercase_ext, TestingFileStorage
 
 __all__ = ['UploadSet']
 
@@ -123,12 +123,12 @@ class UploadSet(object):
         return lowercase_ext(secure_filename(filename))
 
     async def save(self,
-    storage: FileStorage,
+    storage: Union[FileStorage, TestingFileStorage],
     folder: Optional[str]=None,
     name: Optional[str]=None
     ) -> str:
         """
-        This saves a `werkzeug.FileStorage` into this upload set. If the
+        This coroutine saves a `werkzeug.FileStorage` into this upload set. If the
         upload is not allowed, an `UploadNotAllowed` error will be raised.
         Otherwise, the file will be saved and its name (including the folder)
         will be returned.
@@ -140,7 +140,7 @@ class UploadSet(object):
                      `name` instead of explicitly using `folder`, i.e.
                      ``uset.save(file, name="someguy/photo_123.")``
         """
-        if not isinstance(storage, FileStorage):
+        if not (isinstance(storage, FileStorage) or isinstance(storage, TestingFileStorage)):
             raise TypeError("storage must be a werkzeug.FileStorage")
 
         if folder is None and name is not None and "/" in name:

@@ -34,8 +34,8 @@ class UploadConfiguration:
     """
     destination: str
     base_url: Optional[str] = None
-    allow: tuple = field(default_factory=tuple)
-    deny: tuple = field(default_factory=tuple)
+    allow: tuple = ()
+    deny: tuple  = ()
 
     @property
     def tuple(self) -> tuple:
