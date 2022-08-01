@@ -1,6 +1,7 @@
 """
 quart_uploads.utils
 """
+import asyncio
 import os
 
 from quart import Quart
@@ -103,13 +104,15 @@ class TestingFileStorage(FileStorage):
             headers=None)
         self.saved = None
 
-    def save(self, dst, buffer_size=16384):
+    async def save(self, dst, buffer_size=16384):
         """
         This marks the file as saved by setting the `saved` attribute to the
         name of the file it was saved to.
         :param dst: The file to save to.
         :param buffer_size: Ignored.
         """
+        await asyncio.sleep(0.2)
+
         if isinstance(dst, str):
             self.saved = dst
         else:
