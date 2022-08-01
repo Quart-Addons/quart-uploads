@@ -18,7 +18,7 @@ def test_filenames():
         assert uset.file_allowed(name) is result
 
 @pytest.mark.asyncio
-async def test_non_ascii_filenames():
+async def test_non_ascii_filenames(tmp_path):
     """
     Tests non ascii filenames.
     """
@@ -26,7 +26,9 @@ async def test_non_ascii_filenames():
     uset._config = UploadConfiguration('/uploads')
 
     tfs = TestingFileStorage(filename='天安门.jpg')
-    res = await uset.save(tfs, name='secret.')
+    res = await uset.save_testing(tfs)
+    assert res == 'jpg'
+    res = await uset.save_testing(tfs, name='secret.')
     assert res == 'secret.jpg'
 
 def test_default_extensions():
