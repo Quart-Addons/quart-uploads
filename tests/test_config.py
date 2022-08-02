@@ -122,7 +122,7 @@ def test_mixed_defaults(app):
     file_conf, photos_conf = set_config['files'], set_config['photos']
 
     assert file_conf == UploadConfiguration('/var/uploads/files','http://localhost:6001/files/')
-    assert photos_conf == UploadConfiguration('/mnt/photos', 'http://localhost:6002/')
+    assert photos_conf == UploadConfiguration('/mnt/photos/', 'http://localhost:6002/')
 
 def test_default_dest_callables(app):
     """
@@ -130,7 +130,7 @@ def test_default_dest_callables(app):
     """
     files = UploadSet('files', default_dest=lambda app: os.path.join(
                       app.config['INSTANCE'], 'files'))
-    photos = UploadSet('files'), UploadSet('photos')
+    photos = UploadSet('photos')
 
     set_config = configure(
         app,
@@ -144,4 +144,4 @@ def test_default_dest_callables(app):
     file_conf, photos_conf = set_config['files'], set_config['photos']
 
     assert file_conf == UploadConfiguration('/home/me/webapps/thisapp/files', None)
-    assert photos_conf == UploadConfiguration('/mnt/photos', 'http://localhost:6002/')
+    assert photos_conf == UploadConfiguration('/mnt/photos/', 'http://localhost:6002/')
