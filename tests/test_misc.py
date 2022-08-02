@@ -2,11 +2,12 @@
 Tests Quart-Uploads Utilities.
 """
 from __future__ import with_statement
-
+import pytest
 from quart_uploads import (addslash, extension, lowercase_ext,
                            TestingFileStorage, ALL, AllExcept)
 
-def test_tfs():
+@pytest.mark.asyncio
+async def test_tfs():
     """
     File Storage Testing.
     """
@@ -14,7 +15,7 @@ def test_tfs():
     assert tfs.filename == 'foo.bar'
     assert tfs.name is None
     assert tfs.saved is None
-    tfs.save('foo_bar.txt')
+    await tfs.save('foo_bar.txt')
     assert tfs.saved == 'foo_bar.txt'
 
 def test_extension():
