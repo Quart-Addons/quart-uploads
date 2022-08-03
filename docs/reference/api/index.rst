@@ -7,7 +7,7 @@ API Reference
    
    configuration.rst 
    set.rst
+   utils.rst
    route.rst
    file_ext.rst
-   utils.rst
    exceptions.rst
