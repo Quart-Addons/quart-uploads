@@ -1,20 +1,34 @@
-.. Quart Uploads documentation master file, created by
-   sphinx-quickstart on Wed Aug  3 01:06:27 2022.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+============
+Quart-Uploads
+============
 
-Welcome to Quart Uploads's documentation!
-=========================================
+.. module:: quart_uploads
+
+Flask-Uploads allows your application to flexibly and efficiently handle file
+uploading and serving the uploaded files.
+
+You can create different sets of uploads - one for document attachments, one
+for photos, etc. - and the application can be configured to save them all in
+different places and to generate different URLs for them.
+
+Quart-Uploads is developed on github, `here <https://github.com/Quart-Addons/quart-uploads>`_ . 
+
+For more information on Quart, `visit here <https://quart.palletsprojects.com/en/latest/>`_ .
+
+Quart-Uploads is based on `Flask-Uploads <https://github.com/maxcountryman/flask-uploads>`_ by maxcountryman. 
+
+How to guides
+-------------
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
 
+   how_to_guides/index.rst
 
+API
+---
 
-Indices and tables
-==================
+.. toctree::
+   :maxdepth: 2
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   api/index.rst
