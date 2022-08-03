@@ -4,7 +4,7 @@ Quart-Uploads
 
 .. module:: quart_uploads
 
-Flask-Uploads allows your application to flexibly and efficiently handle file
+Quart-Uploads allows your application to flexibly and efficiently handle file
 uploading and serving the uploaded files.
 
 You can create different sets of uploads - one for document attachments, one
@@ -25,10 +25,10 @@ How to guides
 
    how_to_guides/index.rst
 
-API
----
+Reference
+---------
 
 .. toctree::
    :maxdepth: 2
 
-   api/index.rst
+   reference/index.rst
