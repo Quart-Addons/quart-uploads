@@ -22,13 +22,16 @@ async def test_non_ascii_filenames(tmp_path):
     """
     Tests non ascii filenames.
     """
+    dir = tmp_path / "uploads"
+    dir.mkdir()
+
     uset = UploadSet('files')
-    uset._config = UploadConfiguration('/uploads')
+    uset._config = UploadConfiguration(dir)
 
     tfs = TestingFileStorage(filename='天安门.jpg')
-    res = await uset.save_testing(tfs)
+    res = await uset.save(tfs)
     assert res == 'jpg'
-    res = await uset.save_testing(tfs, name='secret.')
+    res = await uset.save(tfs, name='secret.')
     assert res == 'secret.jpg'
 
 def test_default_extensions():
