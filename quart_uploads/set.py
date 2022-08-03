@@ -141,7 +141,7 @@ class UploadSet(object):
                      `name` instead of explicitly using `folder`, i.e.
                      ``uset.save(file, name="someguy/photo_123.")``
         """
-        if not isinstance(storage, FileStorage):
+        if not (isinstance(storage, FileStorage) or isinstance(storage, TestingFileStorage)):
             raise TypeError("Storage must be a werkzeug.FileStorage")
 
         if folder is None and name is not None and "/" in name:
@@ -173,58 +173,6 @@ class UploadSet(object):
 
         target = os.path.join(target_folder, basename)
 
-        await storage.save(target)
-
-        if folder:
-            return posixpath.join(folder, basename)
-        else:
-            return basename
-
-    async def save_testing(
-        self,
-        storage: TestingFileStorage,
-        folder: Optional[str]=None,
-        name: Optional[str]=None
-    ) -> str:
-        """
-        This corotine mocks saving a file using `TestingFileStorage` into
-        this upload set. If the upload is not allowed, an `UploadNotAllowed`
-        error will be raised. Otherwise, the file will be saved and its name
-        (including the folder) will be returned.
-        :param storage: The uploaded file to save.
-        :param folder: The subfolder within the upload set to save to.
-        :param name: The name to save the file as. If it ends with a dot, the
-                     file's extension will be appended to the end. (If you
-                     are using `name`, you can include the folder in the
-                     `name` instead of explicitly using `folder`, i.e.
-                     ``uset.save(file, name="someguy/photo_123.")``
-        """
-        if not isinstance(storage, TestingFileStorage):
-            raise TypeError("Storage must be a TestingFileStorage object.")
-
-        if folder is None and name is not None and "/" in name:
-            folder, name = os.path.split(name)
-
-        basename = self.get_basename(storage.filename)
-
-        if not self.file_allowed(basename):
-            raise UploadNotAllowed()
-
-        if name:
-            if name.endswith('.'):
-                basename = name + extension(basename)
-            else:
-                basename = name
-
-        if folder:
-            target_folder = os.path.join(self.config.destination, folder)
-        else:
-            target_folder = self.config.destination
-
-        # Skip creating folders like in the save function, since just
-        # just for testing purposes.
-
-        target = os.path.join(target_folder, basename)
         await storage.save(target)
 
         if folder:
