@@ -40,7 +40,7 @@ class UploadSet(object):
     def __init__(
         self,
         name: str='files',
-        extensions: tuple=DEFAULTS,
+        extensions: tuple = DEFAULTS,
         default_dest: Optional[str]=None
         ) -> None:
         if not name.isalnum():
