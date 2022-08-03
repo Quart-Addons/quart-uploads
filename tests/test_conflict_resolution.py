@@ -67,8 +67,7 @@ async def test_conflict_without_extension(tmp_path):
     file = dir / "foo"
     file.write_text("Some foo data.")
 
-    
-    uset = UploadSet('files', extensions=())
+    uset = UploadSet('files', extensions=(''))
     uset._config = UploadConfiguration(dir)
     tfs = TestingFileStorage(filename='foo')
     res = await uset.save(tfs)
