@@ -113,8 +113,11 @@ class UploadSet(object):
         extensions, call back into this.
         :param ext: The extension to check, without the dot.
         """
-        return ((ext in self.config.allow) or
-                (ext in self.extensions and ext not in self.config.deny))
+        if not self.extensions:
+            return True
+        else:
+            return ((ext in self.config.allow) or
+                    (ext in self.extensions and ext not in self.config.deny))
 
     def get_basename(self, filename:str) -> str:
         """
