@@ -14,7 +14,7 @@ from werkzeug.utils import secure_filename
 
 from .exceptions import UploadNotAllowed
 from .file_ext import DEFAULTS
-from .utils import extension, lowercase_ext, TestingFileStorage
+from .utils import extension, lowercase_ext
 
 __all__ = ['UploadSet']
 
