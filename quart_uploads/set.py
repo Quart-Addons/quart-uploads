@@ -114,7 +114,8 @@ class UploadSet(object):
         :param ext: The extension to check, without the dot.
         """
         if not self.extensions:
-            return True
+            if (ext in self.config.allow) or (ext not in self.config.deny):
+                return True
         else:
             return ((ext in self.config.allow) or
                     (ext in self.extensions and ext not in self.config.deny))
