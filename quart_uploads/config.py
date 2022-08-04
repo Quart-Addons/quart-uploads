@@ -7,7 +7,7 @@ helper functions for the extension.
 """
 import os
 
-from dataclasses import dataclass, astuple, field
+from dataclasses import dataclass, astuple
 from typing import Optional, Union
 
 from quart import Quart
