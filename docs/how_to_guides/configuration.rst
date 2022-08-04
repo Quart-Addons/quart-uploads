@@ -45,6 +45,5 @@ However, you don't have to set any of the ``_URL`` settings - if you don't,
 then they will be served internally by Quart. They are just there so if you
 have heavy upload traffic, you can have a faster production server.
 
-If you are running Flask 0.6 or greater, or the application uses
-``patch_request_class(app, None)``, then you can set `MAX_CONTENT_LENGTH` to
-limit the size of uploaded files.
+In order to have the application limit the size of uploaded files set the
+Quart defulat configuration variable `MAX_CONTENT_LENGTH`.
