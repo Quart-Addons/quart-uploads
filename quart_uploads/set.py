@@ -141,7 +141,7 @@ class UploadSet(object):
                      `name` instead of explicitly using `folder`, i.e.
                      ``uset.save(file, name="someguy/photo_123.")``
         """
-        if not (isinstance(storage, FileStorage) or isinstance(storage, TestingFileStorage)):
+        if not isinstance(storage, FileStorage):
             raise TypeError("Storage must be a werkzeug.FileStorage")
 
         if folder is None and name is not None and "/" in name:
