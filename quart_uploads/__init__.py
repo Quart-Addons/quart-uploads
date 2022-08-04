@@ -9,8 +9,7 @@ from .exceptions import UploadNotAllowed, AllExcept
 from .file_ext import (TEXT, DOCUMENTS, IMAGES, AUDIO, DATA, SCRIPTS,
                        ARCHIVES, SOURCE, EXECUTABLES, DEFAULTS, ALL)
 from .set import UploadSet
-from .utils import (extension, lowercase_ext, addslash,
-                   patch_request_class, TestingFileStorage)
+from .utils import extension, lowercase_ext, addslash, TestingFileStorage
 
 __all__ = [
     'config_for_set',
@@ -30,7 +29,6 @@ __all__ = [
     'extension',
     'lowercase_ext',
     'addslash',
-    'patch_request_class',
     'TestingFileStorage'
     ]
 
