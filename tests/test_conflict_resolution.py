@@ -2,7 +2,7 @@
 Tests folder conflict resolution with
 Quart-Uploads.
 """
-import os 
+import os
 import pytest
 from quart_uploads import UploadConfiguration, UploadSet, TestingFileStorage
 
@@ -69,7 +69,7 @@ async def test_conflict_without_extension(tmp_path):
 
     uset = UploadSet('files', extensions=(''))
     uset._config = UploadConfiguration(dir)
-    
+
     tfs = TestingFileStorage(filename='foo')
     res = await uset.save(tfs)
 
