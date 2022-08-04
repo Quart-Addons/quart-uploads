@@ -31,8 +31,7 @@ And then you can use the `~UploadSet.save` method to save uploaded files and
         return await render_template('show.html', url=url, photo=photo)
 
 If you have a "default location" for storing uploads - for example, if your
-app has an "instance" directory like `Zine`_ and uploads should be saved to
-the instance directory's ``uploads`` folder - you can pass a ``default_dest``
+app has an "instance" directory like you can pass a ``default_dest``
 callable to the set constructor. It takes the application as its argument.
 For example::
 
@@ -40,5 +39,3 @@ For example::
 
 This won't prevent a different destination from being set in the config,
 though. It's just to save your users a little configuration time.
-
-.. _Zine: http://zine.pocoo.org/
