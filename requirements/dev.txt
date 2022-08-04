@@ -2,6 +2,7 @@
 pydata-sphinx-theme 
 pytest
 pytest-asyncio
+quart-auth
 sphinx
 sphinxcontrib-napoleon
 twine 
