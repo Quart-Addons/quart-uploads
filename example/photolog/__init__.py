@@ -65,7 +65,7 @@ async def new():
 
 
 @app.route('/login', methods=['GET', 'POST'])
-def login():
+async def login():
     if session.get('logged_in'):
         flash("You are already logged in")
         return to_index()
@@ -83,7 +83,7 @@ def login():
 
 
 @app.route('/logout')
-def logout():
+async def logout():
     if session.get('logged_in'):
         session['logged_in'] = False
         await flash("Successfully logged out")
@@ -92,5 +92,5 @@ def logout():
     return to_index()
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
+def run() -> Quart:
+    return app
