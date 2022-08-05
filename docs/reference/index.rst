@@ -1,3 +1,5 @@
+.. _ref_index:
+
 ==========
 References
 ==========
@@ -8,4 +10,3 @@ References
 
    api/index.rst
    cheatsheet.rst
-   version.rst

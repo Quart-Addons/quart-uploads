@@ -2,6 +2,10 @@
 #
 # For the full list of built-in configuration values, see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
+import os 
+import sys 
+
+sys.path.insert(0, os.path.abspath("../"))
 
 project = 'Quart-Uploads'
 copyright = '2022, Chris Rood'
@@ -18,6 +22,7 @@ autodoc_default_options = {
     'member-order': 'bysource',
 }
 
+autodoc_mock_imports = [""]
 templates_path = ['_templates']
 exclude_patterns = ['_build']
 

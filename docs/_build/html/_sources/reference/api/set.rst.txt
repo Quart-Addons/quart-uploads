@@ -1,6 +1,8 @@
+.. _api_set:
+
 ==========
 Upload Set
 ==========
 
-.. autoclass:: quart_uploads.set.UploadSet
+.. autoclass:: quart_uploads.UploadSet
     :members:

@@ -1,3 +1,5 @@
+.. _sets:
+
 =============
 Upload Sets
 =============
@@ -8,7 +10,7 @@ code::
     photos = UploadSet('photos', IMAGES)
 
 And then you can use the `~UploadSet.save` method to save uploaded files and
-`~UploadSet.path` and `~UploadSet.url` to access them. For example::
+`~UploadSet.path` and `~UploadSet.url` to access them. For example:
 
 .. code-block:: python 
 

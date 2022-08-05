@@ -1,3 +1,5 @@
+.. _app_config:
+
 =================
 App Configuration
 =================

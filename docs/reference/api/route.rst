@@ -1,3 +1,5 @@
+.. _api_route:
+
 =================
 Route for Uploads
 =================
@@ -14,6 +16,7 @@ the app from `configure_uploads`.
 The actual view is as follows:
 
 .. code-block:: python
+    
     @uploads_mod.route('/<setname>/<path:filename>')
     async def uploaded_file(setname, filename):
         """

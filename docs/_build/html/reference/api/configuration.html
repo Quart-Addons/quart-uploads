@@ -216,8 +216,65 @@
               
               <article class="bd-article" role="main">
                 
-  <section id="configuration">
+  <p>.._config:</p>
+<section id="configuration">
 <h1>Configuration<a class="headerlink" href="#configuration" title="Permalink to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="quart_uploads.UploadConfiguration">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">quart_uploads.</span></span><span class="sig-name descname"><span class="pre">UploadConfiguration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destination</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deny</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quart_uploads.UploadConfiguration" title="Permalink to this definition">#</a></dt>
+<dd><p>This holds the configuration for a single <cite>UploadSet</cite>. The constructor’s
+arguments are also the attributes.
+:param destination: The directory to save files to.
+:param base_url: The URL (ending with a /) that files can be downloaded</p>
+<blockquote>
+<div><p>from. If this is <cite>None</cite>, Quart-Uploads will serve the
+files itself.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>allow</strong> – A tuple of extensions to allow, even if they’re not in the
+<cite>UploadSet</cite> extensions list.</p></li>
+<li><p><strong>deny</strong> – A tuple of extensions to deny, even if they are in the
+<cite>UploadSet</cite> extensions list.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="quart_uploads.UploadConfiguration.tuple">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tuple</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span></em><a class="headerlink" href="#quart_uploads.UploadConfiguration.tuple" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns the configuration as a tuple.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="quart_uploads.config_for_set">
+<span class="sig-prename descclassname"><span class="pre">quart_uploads.</span></span><span class="sig-name descname"><span class="pre">config_for_set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="set.html#quart_uploads.UploadSet" title="quart_uploads.set.UploadSet"><span class="pre">UploadSet</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Quart</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">defaults</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#quart_uploads.UploadConfiguration" title="quart_uploads.config.UploadConfiguration"><span class="pre">UploadConfiguration</span></a></span></span><a class="headerlink" href="#quart_uploads.config_for_set" title="Permalink to this definition">#</a></dt>
+<dd><p>This is a helper function for <cite>configure_uploads</cite> that extracts the
+configuration for a single set.
+:param uset: The upload set.
+:param app: The app to load the configuration from.
+:param defaults: A dict with keys <cite>url</cite> and <cite>dest</cite> from the</p>
+<blockquote>
+<div><p><cite>UPLOADS_DEFAULT_DEST</cite> and <cite>DEFAULT_UPLOADS_URL</cite>
+settings.</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="quart_uploads.configure_uploads">
+<span class="sig-prename descclassname"><span class="pre">quart_uploads.</span></span><span class="sig-name descname"><span class="pre">configure_uploads</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Quart</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upload_sets</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="set.html#quart_uploads.UploadSet" title="quart_uploads.set.UploadSet"><span class="pre">UploadSet</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="set.html#quart_uploads.UploadSet" title="quart_uploads.set.UploadSet"><span class="pre">quart_uploads.set.UploadSet</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#quart_uploads.configure_uploads" title="Permalink to this definition">#</a></dt>
+<dd><p>Call this after the app has been configured. It will go through all the
+upload sets, get their configuration, and store the configuration on the
+app. It will also register the uploads module if it hasn’t been set. This
+can be called multiple times with different upload sets. The uploads
+module/blueprint will only be registered if it is needed to serve the
+upload sets.
+:param app: The <cite>~flask.Flask</cite> instance to get the configuration from.
+:param upload_sets: The <cite>UploadSet</cite> instances to configure.</p>
+</dd></dl>
+
 </section>
 
 

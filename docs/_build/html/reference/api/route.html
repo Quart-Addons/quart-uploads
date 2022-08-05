@@ -217,12 +217,24 @@
               <article class="bd-article" role="main">
                 
   <section id="route-for-uploads">
-<h1>Route for Uploads<a class="headerlink" href="#route-for-uploads" title="Permalink to this heading">#</a></h1>
+<span id="api-route"></span><h1>Route for Uploads<a class="headerlink" href="#route-for-uploads" title="Permalink to this heading">#</a></h1>
 <p>The route for the uploads provides a Quart route for serving files
 to the frontend of your Quart application.</p>
 <p>It provides a <cite>Blueprint</cite> for the route, which is then registered to
 the app from <cite>configure_uploads</cite>.</p>
 <p>The actual view is as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@uploads_mod</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&lt;setname&gt;/&lt;path:filename&gt;&#39;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">uploaded_file</span><span class="p">(</span><span class="n">setname</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Extension route for serving files to the</span>
+<span class="sd">    frontend.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">current_app</span><span class="o">.</span><span class="n">upload_set_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">setname</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">config</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">abort</span><span class="p">(</span><span class="mi">404</span><span class="p">)</span>
+    <span class="k">return</span> <span class="k">await</span> <span class="n">send_from_directory</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">destination</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+</pre></div>
+</div>
 </section>
 
 

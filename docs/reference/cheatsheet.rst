@@ -1,3 +1,5 @@
+.. _cheatsheet:
+
 ==========
 Cheatsheet
 ==========
@@ -30,6 +32,7 @@ Large or Advanced Application
 youapplication/photos.py
 
 .. code-block:: python
+
     from quart import Blueprint 
     from quart_uploads import UploadSet, IMAGES
 
@@ -42,6 +45,7 @@ youapplication/photos.py
 yourapplication/audio.py
 
 .. code-block:: python
+
     from quart import Blueprint 
     from quart_uploads import UploadSet, AUDIO
 
@@ -54,6 +58,7 @@ yourapplication/audio.py
 youapplication/app.py
 
 .. code-block:: python
+
     from quart import Quart
     from quart_uploads import configure_uploads
 
@@ -76,7 +81,9 @@ youapplication/app.py
 
 Upload Set 
 -----------
+
 .. code-block:: python 
+    
     from quart_uploads import UploadSet, IMAGES
 
     photos = UploadSet('photos', IMAGES)photos = UploadSet('photos', IMAGES)
@@ -91,6 +98,7 @@ Upload Set
         photos.get_basename('name.jpg') # File basename.
         await photos.save('photo.jpg') # Save a FileStorage file. 
         await photos.resolve_conflict('/uploads', 'photo.jpg') # Resolves filename conflict.
+
     
 
 

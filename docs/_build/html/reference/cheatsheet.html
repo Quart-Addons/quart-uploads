@@ -236,7 +236,7 @@
               <article class="bd-article" role="main">
                 
   <section id="cheatsheet">
-<h1>Cheatsheet<a class="headerlink" href="#cheatsheet" title="Permalink to this heading">#</a></h1>
+<span id="id1"></span><h1>Cheatsheet<a class="headerlink" href="#cheatsheet" title="Permalink to this heading">#</a></h1>
 <section id="basic-app">
 <h2>Basic App<a class="headerlink" href="#basic-app" title="Permalink to this heading">#</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">quart</span> <span class="kn">import</span> <span class="n">Quart</span><span class="p">,</span> <span class="n">render_template</span>
@@ -260,46 +260,69 @@
 </section>
 <section id="large-or-advanced-application">
 <h2>Large or Advanced Application<a class="headerlink" href="#large-or-advanced-application" title="Permalink to this heading">#</a></h2>
-<p>youapplication/photos.py
-.. code-block:: python</p>
-<blockquote>
-<div><p>from quart import Blueprint
-from quart_uploads import UploadSet, IMAGES</p>
-<p>bp = Blueprint(‘photos’, __name__, url_prefix=’/photos’)</p>
-<p>photos = UploadSet(‘photos’, IMAGES)</p>
-<p># Routes &amp; additional code here.</p>
-</div></blockquote>
-<p>yourapplication/audio.py
-.. code-block:: python</p>
-<blockquote>
-<div><p>from quart import Blueprint
-from quart_uploads import UploadSet, AUDIO</p>
-<p>bp = Blueprint(‘audio’, __name__, url_prefix=’/audio’)</p>
-<p>audio = UploadSet(‘audio’, AUDIO)</p>
-<p># Routes &amp; additional code here.</p>
-</div></blockquote>
-<p>youapplication/app.py
-.. code-block:: python</p>
-<blockquote>
-<div><p>from quart import Quart
-from quart_uploads import configure_uploads</p>
-<dl>
-<dt>def create_app() -&gt; Quart:</dt><dd><p>app = Quart(__name__)</p>
-<p>from .photos import bp as photo_bp
-app.register_blueprint(photo_bp)</p>
-<p>from .audio import bp as audio_bp
-app.register_blueprint(audio_bp)</p>
-<p>from .phtoto import photos
-from .audio import audio
-usets = (photos, audio)
-configure_uploads(app, usets)</p>
-<p>return app</p>
-</dd>
-</dl>
-</div></blockquote>
+<p>youapplication/photos.py</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">quart</span> <span class="kn">import</span> <span class="n">Blueprint</span>
+<span class="kn">from</span> <span class="nn">quart_uploads</span> <span class="kn">import</span> <span class="n">UploadSet</span><span class="p">,</span> <span class="n">IMAGES</span>
+
+<span class="n">bp</span> <span class="o">=</span> <span class="n">Blueprint</span><span class="p">(</span><span class="s1">&#39;photos&#39;</span><span class="p">,</span> <span class="vm">__name__</span><span class="p">,</span> <span class="n">url_prefix</span><span class="o">=</span><span class="s1">&#39;/photos&#39;</span><span class="p">)</span>
+
+<span class="n">photos</span> <span class="o">=</span> <span class="n">UploadSet</span><span class="p">(</span><span class="s1">&#39;photos&#39;</span><span class="p">,</span> <span class="n">IMAGES</span><span class="p">)</span>
+
+<span class="c1"># Routes &amp; additional code here.</span>
+</pre></div>
+</div>
+<p>yourapplication/audio.py</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">quart</span> <span class="kn">import</span> <span class="n">Blueprint</span>
+<span class="kn">from</span> <span class="nn">quart_uploads</span> <span class="kn">import</span> <span class="n">UploadSet</span><span class="p">,</span> <span class="n">AUDIO</span>
+
+<span class="n">bp</span> <span class="o">=</span> <span class="n">Blueprint</span><span class="p">(</span><span class="s1">&#39;audio&#39;</span><span class="p">,</span> <span class="vm">__name__</span><span class="p">,</span> <span class="n">url_prefix</span><span class="o">=</span><span class="s1">&#39;/audio&#39;</span><span class="p">)</span>
+
+<span class="n">audio</span> <span class="o">=</span> <span class="n">UploadSet</span><span class="p">(</span><span class="s1">&#39;audio&#39;</span><span class="p">,</span> <span class="n">AUDIO</span><span class="p">)</span>
+
+<span class="c1"># Routes &amp; additional code here.</span>
+</pre></div>
+</div>
+<p>youapplication/app.py</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">quart</span> <span class="kn">import</span> <span class="n">Quart</span>
+<span class="kn">from</span> <span class="nn">quart_uploads</span> <span class="kn">import</span> <span class="n">configure_uploads</span>
+
+<span class="k">def</span> <span class="nf">create_app</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Quart</span><span class="p">:</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">Quart</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+    <span class="kn">from</span> <span class="nn">.photos</span> <span class="kn">import</span> <span class="n">bp</span> <span class="k">as</span> <span class="n">photo_bp</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">register_blueprint</span><span class="p">(</span><span class="n">photo_bp</span><span class="p">)</span>
+
+    <span class="kn">from</span> <span class="nn">.audio</span> <span class="kn">import</span> <span class="n">bp</span> <span class="k">as</span> <span class="n">audio_bp</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">register_blueprint</span><span class="p">(</span><span class="n">audio_bp</span><span class="p">)</span>
+
+    <span class="kn">from</span> <span class="nn">.phtoto</span> <span class="kn">import</span> <span class="n">photos</span>
+    <span class="kn">from</span> <span class="nn">.audio</span> <span class="kn">import</span> <span class="n">audio</span>
+    <span class="n">usets</span> <span class="o">=</span> <span class="p">(</span><span class="n">photos</span><span class="p">,</span> <span class="n">audio</span><span class="p">)</span>
+    <span class="n">configure_uploads</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">usets</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">app</span>
+</pre></div>
+</div>
 </section>
 <section id="upload-set">
 <h2>Upload Set<a class="headerlink" href="#upload-set" title="Permalink to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">quart_uploads</span> <span class="kn">import</span> <span class="n">UploadSet</span><span class="p">,</span> <span class="n">IMAGES</span>
+
+<span class="n">photos</span> <span class="o">=</span> <span class="n">UploadSet</span><span class="p">(</span><span class="s1">&#39;photos&#39;</span><span class="p">,</span> <span class="n">IMAGES</span><span class="p">)</span><span class="n">photos</span> <span class="o">=</span> <span class="n">UploadSet</span><span class="p">(</span><span class="s1">&#39;photos&#39;</span><span class="p">,</span> <span class="n">IMAGES</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/upload&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">some_route</span><span class="p">():</span>
+    <span class="n">photos</span><span class="o">.</span><span class="n">config</span> <span class="c1"># Current configuration for the upload set.</span>
+    <span class="n">photos</span><span class="o">.</span><span class="n">url</span><span class="p">(</span><span class="s1">&#39;name.jpg&#39;</span><span class="p">)</span> <span class="c1"># Gets the url of file using extension route.</span>
+    <span class="n">photos</span><span class="o">.</span><span class="n">path</span><span class="p">(</span><span class="s1">&#39;name.jpg&#39;</span><span class="p">)</span> <span class="c1"># Absolute path of uploaded file.</span>
+    <span class="n">photos</span><span class="o">.</span><span class="n">file_allowed</span><span class="p">(</span><span class="s1">&#39;name.jpg&#39;</span><span class="p">)</span> <span class="c1"># If the file is allowed</span>
+    <span class="n">photos</span><span class="o">.</span><span class="n">extension_allowed</span><span class="p">(</span><span class="s1">&#39;.jpg&#39;</span><span class="p">)</span> <span class="c1"># IF the file extension is allowed.</span>
+    <span class="n">photos</span><span class="o">.</span><span class="n">get_basename</span><span class="p">(</span><span class="s1">&#39;name.jpg&#39;</span><span class="p">)</span> <span class="c1"># File basename.</span>
+    <span class="k">await</span> <span class="n">photos</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;photo.jpg&#39;</span><span class="p">)</span> <span class="c1"># Save a FileStorage file.</span>
+    <span class="k">await</span> <span class="n">photos</span><span class="o">.</span><span class="n">resolve_conflict</span><span class="p">(</span><span class="s1">&#39;/uploads&#39;</span><span class="p">,</span> <span class="s1">&#39;photo.jpg&#39;</span><span class="p">)</span> <span class="c1"># Resolves filename conflict.</span>
+</pre></div>
+</div>
 </section>
 </section>
 

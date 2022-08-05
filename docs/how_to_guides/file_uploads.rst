@@ -1,3 +1,5 @@
+.. _file_uploads:
+
 =================
 File Upload Forms
 =================

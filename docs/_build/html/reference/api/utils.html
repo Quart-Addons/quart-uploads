@@ -217,7 +217,55 @@
               <article class="bd-article" role="main">
                 
   <section id="utilities">
-<h1>Utilities<a class="headerlink" href="#utilities" title="Permalink to this heading">#</a></h1>
+<span id="api-utils"></span><h1>Utilities<a class="headerlink" href="#utilities" title="Permalink to this heading">#</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="quart_uploads.extension">
+<span class="sig-prename descclassname"><span class="pre">quart_uploads.</span></span><span class="sig-name descname"><span class="pre">extension</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#quart_uploads.extension" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns the extension used for a file.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="quart_uploads.lowercase_ext">
+<span class="sig-prename descclassname"><span class="pre">quart_uploads.</span></span><span class="sig-name descname"><span class="pre">lowercase_ext</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#quart_uploads.lowercase_ext" title="Permalink to this definition">#</a></dt>
+<dd><p>This is a helper used by UploadSet.save to provide lowercase extensions for
+all processed files, to compare with configured extensions in the same
+case.
+:param filename: The filename to ensure has a lowercase extension.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="quart_uploads.addslash">
+<span class="sig-prename descclassname"><span class="pre">quart_uploads.</span></span><span class="sig-name descname"><span class="pre">addslash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#quart_uploads.addslash" title="Permalink to this definition">#</a></dt>
+<dd><p>Adds an end slash to a url.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="quart_uploads.TestingFileStorage">
+<span class="sig-prename descclassname"><span class="pre">quart_uploads.</span></span><span class="sig-name descname"><span class="pre">TestingFileStorage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stream</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'application/octet-stream'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quart_uploads.TestingFileStorage" title="Permalink to this definition">#</a></dt>
+<dd><p>This is a helper for testing upload behavior in your application. You
+can manually create it, and its save method is overloaded to set <cite>saved</cite>
+to the name of the file it was saved to. All of these parameters are
+optional, so only bother setting the ones relevant to your application.
+:param stream: A stream. The default is an empty stream.
+:param filename: The filename uploaded from the client. The default is the</p>
+<blockquote>
+<div><p>stream’s name.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – The name of the form field it was loaded from. The default is
+<cite>None</cite>.</p></li>
+<li><p><strong>content_type</strong> – The content type it was uploaded as. The default is
+<code class="docutils literal notranslate"><span class="pre">application/octet-stream</span></code>.</p></li>
+<li><p><strong>content_length</strong> – How long it is. The default is -1.</p></li>
+<li><p><strong>headers</strong> – Multipart headers as a <cite>werkzeug.Headers</cite>. The default is
+<cite>None</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 
 

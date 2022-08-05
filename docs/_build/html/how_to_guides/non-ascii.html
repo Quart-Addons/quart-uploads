@@ -166,19 +166,12 @@
               <article class="bd-article" role="main">
                 
   <section id="non-ascii-filename-support">
-<h1>Non-ASCII Filename Support<a class="headerlink" href="#non-ascii-filename-support" title="Permalink to this heading">#</a></h1>
+<span id="ascii"></span><h1>Non-ASCII Filename Support<a class="headerlink" href="#non-ascii-filename-support" title="Permalink to this heading">#</a></h1>
 <p>Quart-Uplaods use Werkzeug’s <code class="docutils literal notranslate"><span class="pre">secure_filename()</span></code> to check filename, it will omit
 Non-ASCII string. When the filename is completely consist of Non-ASCII string,
 such as Chinese or Japanese, it will return empty filename like <code class="docutils literal notranslate"><span class="pre">.jpg</span></code>. If your
 files may encounter a situation like this, you have to set it’s name or generate
 random filename:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span> <span class="n">code</span><span class="o">-</span><span class="n">block</span><span class="p">::</span> <span class="n">python</span>
-</pre></div>
-</div>
-<blockquote>
-<div><p>uset.save(file, name=’photo_123.’)
-# If name ends with a dot, the file’s extension will be appended to the end.</p>
-</div></blockquote>
 </section>
 
 

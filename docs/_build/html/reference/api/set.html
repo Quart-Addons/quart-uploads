@@ -217,7 +217,124 @@
               <article class="bd-article" role="main">
                 
   <section id="upload-set">
-<h1>Upload Set<a class="headerlink" href="#upload-set" title="Permalink to this heading">#</a></h1>
+<span id="api-set"></span><h1>Upload Set<a class="headerlink" href="#upload-set" title="Permalink to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="quart_uploads.UploadSet">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">quart_uploads.</span></span><span class="sig-name descname"><span class="pre">UploadSet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'files'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extensions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">('txt',</span> <span class="pre">'rtf',</span> <span class="pre">'odf',</span> <span class="pre">'ods',</span> <span class="pre">'gnumeric',</span> <span class="pre">'abw',</span> <span class="pre">'doc',</span> <span class="pre">'docx',</span> <span class="pre">'xls',</span> <span class="pre">'xlsx',</span> <span class="pre">'pdf',</span> <span class="pre">'jpg',</span> <span class="pre">'jpe',</span> <span class="pre">'jpeg',</span> <span class="pre">'png',</span> <span class="pre">'gif',</span> <span class="pre">'svg',</span> <span class="pre">'bmp',</span> <span class="pre">'webp',</span> <span class="pre">'csv',</span> <span class="pre">'ini',</span> <span class="pre">'json',</span> <span class="pre">'plist',</span> <span class="pre">'xml',</span> <span class="pre">'yaml',</span> <span class="pre">'yml')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_dest</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quart_uploads.UploadSet" title="Permalink to this definition">#</a></dt>
+<dd><p>This represents a single set of uploaded files. Each upload set is
+independent of the others. This can be reused across multiple application
+instances, as all configuration is stored on the application object itself
+and found with <cite>quart.current_app</cite>.
+:param name: The name of this upload set. It defaults to <code class="docutils literal notranslate"><span class="pre">files</span></code>, but</p>
+<blockquote>
+<div><p>you can pick any alphanumeric name you want. (For simplicity,
+it’s best to use a plural noun.)</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>extensions</strong> – The extensions to allow uploading in this set. The
+easiest way to do this is to add together the extension
+presets (for example, <code class="docutils literal notranslate"><span class="pre">TEXT</span> <span class="pre">+</span> <span class="pre">DOCUMENTS</span> <span class="pre">+</span> <span class="pre">IMAGES</span></code>).
+It can be overridden by the configuration with the
+<cite>UPLOADED_X_ALLOW</cite> and <cite>UPLOADED_X_DENY</cite> configuration
+parameters. The default is <cite>DEFAULTS</cite>.</p></li>
+<li><p><strong>default_dest</strong> – If given, this should be a callable. If you call it
+with the app, it should return the default upload
+destination path for that app.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="quart_uploads.UploadSet.config">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">config</span></span><a class="headerlink" href="#quart_uploads.UploadSet.config" title="Permalink to this definition">#</a></dt>
+<dd><p>This gets the current configuration. By default, it looks up the
+current application and gets the configuration from there. But if you
+don’t want to go to the full effort of setting an application, or it’s
+otherwise outside of a request context, set the <cite>_config</cite> attribute to
+an <cite>UploadConfiguration</cite> instance, then set it back to <cite>None</cite> when
+you’re done.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="quart_uploads.UploadSet.url">
+<span class="sig-name descname"><span class="pre">url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#quart_uploads.UploadSet.url" title="Permalink to this definition">#</a></dt>
+<dd><p>This function gets the URL a file uploaded to this set would be
+accessed at. It doesn’t check whether said file exists.
+:param filename: The filename to return the URL for.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="quart_uploads.UploadSet.path">
+<span class="sig-name descname"><span class="pre">path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#quart_uploads.UploadSet.path" title="Permalink to this definition">#</a></dt>
+<dd><p>This returns the absolute path of a file uploaded to this set. It
+doesn’t actually check whether said file exists.
+:param filename: The filename to return the path for.
+:param folder: The subfolder within the upload set previously used</p>
+<blockquote>
+<div><p>to save to.</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="quart_uploads.UploadSet.file_allowed">
+<span class="sig-name descname"><span class="pre">file_allowed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">basename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#quart_uploads.UploadSet.file_allowed" title="Permalink to this definition">#</a></dt>
+<dd><p>This tells whether a file is allowed. It should return <cite>True</cite> if the
+given <cite>werkzeug.FileStorage</cite> object can be saved with the given
+basename, and <cite>False</cite> if it can’t. The default implementation just
+checks the extension, so you can override this if you want.
+:param storage: The <cite>werkzeug.FileStorage</cite> to check.
+:param basename: The basename it will be saved under.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="quart_uploads.UploadSet.extension_allowed">
+<span class="sig-name descname"><span class="pre">extension_allowed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ext</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#quart_uploads.UploadSet.extension_allowed" title="Permalink to this definition">#</a></dt>
+<dd><p>This determines whether a specific extension is allowed. It is called
+by <cite>file_allowed</cite>, so if you override that but still want to check
+extensions, call back into this.
+:param ext: The extension to check, without the dot.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="quart_uploads.UploadSet.get_basename">
+<span class="sig-name descname"><span class="pre">get_basename</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#quart_uploads.UploadSet.get_basename" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns the file basename.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="quart_uploads.UploadSet.save">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">storage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">FileStorage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#quart_uploads.UploadSet.save" title="Permalink to this definition">#</a></dt>
+<dd><p>This coroutine saves a <cite>werkzeug.FileStorage</cite> into this upload set. If the
+upload is not allowed, an <cite>UploadNotAllowed</cite> error will be raised.
+Otherwise, the file will be saved and its name (including the folder)
+will be returned.
+:param storage: The uploaded file to save.
+:param folder: The subfolder within the upload set to save to.
+:param name: The name to save the file as. If it ends with a dot, the</p>
+<blockquote>
+<div><p>file’s extension will be appended to the end. (If you
+are using <cite>name</cite>, you can include the folder in the
+<cite>name</cite> instead of explicitly using <cite>folder</cite>, i.e.
+<code class="docutils literal notranslate"><span class="pre">uset.save(file,</span> <span class="pre">name=&quot;someguy/photo_123.&quot;)</span></code></p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="quart_uploads.UploadSet.resolve_conflict">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">resolve_conflict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_folder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#quart_uploads.UploadSet.resolve_conflict" title="Permalink to this definition">#</a></dt>
+<dd><p>If a file with the selected name already exists in the target folder,
+this method is called to resolve the conflict. It should return a new
+basename for the file.
+The default implementation splits the name and extension and adds a
+suffix to the name consisting of an underscore and a number, and tries
+that until it finds one that doesn’t exist.
+:param target_folder: The absolute path to the target.
+:param basename: The file’s original basename.</p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
 

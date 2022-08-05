@@ -1,3 +1,5 @@
+.. _ascii:
+
 ==========================
 Non-ASCII Filename Support
 ==========================
@@ -6,7 +8,7 @@ Quart-Uplaods use Werkzeug's ``secure_filename()`` to check filename, it will om
 Non-ASCII string. When the filename is completely consist of Non-ASCII string, 
 such as Chinese or Japanese, it will return empty filename like ``.jpg``. If your 
 files may encounter a situation like this, you have to set it's name or generate 
-random filename::
+random filename:
 
 .. code-block:: python 
     uset.save(file, name='photo_123.')

@@ -1,8 +1,9 @@
-============
-Quart-Uploads
-============
+:orphan:
 
-.. module:: quart_uploads
+.. title:: Quart Uploads Documentation
+
+Quart Uploads
+-------------
 
 Quart-Uploads allows your application to flexibly and efficiently handle file
 uploading and serving the uploaded files.
