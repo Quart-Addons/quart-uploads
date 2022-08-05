@@ -28,7 +28,6 @@ Large or Advanced Application
 ------------------------------
 
 youapplication/photos.py
-
 .. code-block:: python
     from quart import Blueprint 
     from quart_uploads import UploadSet, IMAGES
@@ -40,7 +39,6 @@ youapplication/photos.py
     # Routes & additional code here. 
 
 yourapplication/audio.py
-
 .. code-block:: python
     from quart import Blueprint 
     from quart_uploads import UploadSet, AUDIO
@@ -52,7 +50,6 @@ yourapplication/audio.py
     # Routes & additional code here.
 
 youapplication/app.py
-
 .. code-block:: python
     from quart import Quart
     from quart_uploads import configure_uploads
