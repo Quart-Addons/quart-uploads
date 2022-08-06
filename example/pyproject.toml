@@ -7,9 +7,17 @@ license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-quart = "^0.18.0"
+quart = "*"
+quart_uploads = "*"
+Flask-SQLAlchemy = "*"
 
 [tool.poetry.dev-dependencies]
+pytest = "*"
+pytest-asyncio = "*"
+
+[tool.poetry.scripts]
+init_db = "photolog:init_db"
+start = "photolog:run"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
