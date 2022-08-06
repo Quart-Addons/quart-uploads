@@ -7,3 +7,8 @@ was created by by Vic Shóstak, @koddr,
 
 .. image:: ../_static/logo.png
    :alt: Quart Uploads Logo
+
+|
+
+.. image:: ../_static/logo_short.png
+   :alt: Quart Uploads Logo Short
