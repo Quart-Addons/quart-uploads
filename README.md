@@ -1,7 +1,7 @@
 Quart Uploads
 =============
 
-.. image:: https://raw.githubusercontent.com/Quart-Addons/quart-uploads/main/logos/logo.png
+.. image:: https://github.com/Quart-Addons/quart-uploads/blob/3f91931d2cfeda302f862ce0016721f785a1c98f/logos/logo.png
    :alt: Quart Uploads Logo
 
 Quart-Uploads allows your application to flexibly and efficiently handle file
