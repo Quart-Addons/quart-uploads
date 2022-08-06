@@ -10,3 +10,4 @@ References
 
    api/index.rst
    cheatsheet.rst
+   logo.rst
