@@ -2,6 +2,11 @@
 
 .. title:: Quart Uploads Documentation
 
+.. image:: _static/logo.png
+   :width: 300px
+   :alt: Quart logo
+   :align: right
+
 Quart Uploads
 -------------
 

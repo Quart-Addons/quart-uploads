@@ -36,10 +36,32 @@ master_doc = 'index'
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
 html_theme = 'pydata_sphinx_theme'
+html_logo = "_static/logo_short.png"
 html_theme_path = ['_themes']
 html_static_path = ['_static']
-htmlhelp_basename = 'Quart-Uploadsdoc'
+htmlhelp_basename = 'QuartUploadsdoc'
 
+# Theme options are theme-specific and customize the look and feel of a theme
+# further.  For a list of options available for each theme, see the
+# documentation.
+#
+html_theme_options = {
+    "external_links": [
+        {"name": "Source code", "url": "https://github.com/Quart-Addons/quart-uploads"},
+        {"name": "Issues", "url": "https://github.com/Quart-Addons/quart-uploads/issues"},
+    ],
+    "icon_links": [
+        {
+            "name": "Github",
+            "url": "https://github.com/pallets/quart",
+            "icon": "fab fa-github",
+        },
+    ],
+}
+
+html_sidebars = {
+    "index": [],
+}
 latex_documents = [
   ('index', 'Quart-Uploads.tex', 'Quart-Uploads Documentation',
    'Chris Rood', 'manual'),

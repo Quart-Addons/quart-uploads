@@ -62,8 +62,9 @@
   
   
   
+    <img src="_static/logo_short.png" class="logo__image only-light" alt="Logo image">
+    <img src="_static/logo_short.png" class="logo__image only-dark" alt="Logo image">
   
-    <p class="title logo__title">Quart-Uploads 0.0.1 documentation</p>
   
 </a>
     
@@ -92,6 +93,14 @@
 </li>
 
     
+    <li class="nav-item">
+        <a class="nav-link nav-external" href="https://github.com/Quart-Addons/quart-uploads">Source code<i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href="https://github.com/Quart-Addons/quart-uploads/issues">Issues<i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
 </ul>
       </div>
       
@@ -109,6 +118,10 @@
       
       <div class="navbar-end-item">
         <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/pallets/quart" rel="noopener" target="_blank" title="Github"><span><i class="fab fa-github"></i></span>
+            <label class="sr-only">Github</label></a>
+        </li>
       </ul>
       </div>
       
@@ -122,26 +135,13 @@
       <div class="bd-container__inner row">
           
 
-<!-- Only show if we have sidebars configured, else just a small margin  -->
-<div class="bd-sidebar-primary col-12 col-md-3 bd-sidebar">
-  <div class="sidebar-start-items"><form class="bd-search d-flex align-items-center" action="search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-  <div class="bd-toc-item active">
-    
-  </div>
-</nav>
-  </div>
-  <div class="sidebar-end-items">
-  </div>
-</div>
+<div class="sidebar-primary col-12 col-md-1 col-xl-2 bd-sidebar no-sidebar"></div>
 
 
           
 
 
-<div class="bd-sidebar-secondary d-none d-xl-block col-xl-2 bd-toc">
+<div class="bd-sidebar-secondary d-none d-md-block col-md-2 bd-toc">
   
     
     <div class="toc-item">
@@ -182,11 +182,12 @@
 
           
           
-          <div class="bd-content col-12 col-md-9 col-xl-7">
+          <div class="bd-content col-12 col-md-9 col-xl-8">
               
               <article class="bd-article" role="main">
                 
-  <section id="quart-uploads">
+  <a class="reference internal image-reference" href="_images/logo.png"><img alt="Quart logo" class="align-right" src="_images/logo.png" style="width: 300px;" /></a>
+<section id="quart-uploads">
 <h1>Quart Uploads<a class="headerlink" href="#quart-uploads" title="Permalink to this heading">#</a></h1>
 <p>Quart-Uploads allows your application to flexibly and efficiently handle file
 uploading and serving the uploaded files.</p>
