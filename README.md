@@ -1,8 +1,7 @@
 Quart Uploads
 =============
 
-.. image:: logos/logo.png
-   :alt: Quart Uploads Logo
+![Quart Uploads Logo](logos/logo.png)
 
 Quart-Uploads allows your application to flexibly and efficiently handle file
 uploading and serving the uploaded files.
