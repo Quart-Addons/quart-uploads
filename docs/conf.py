@@ -52,9 +52,15 @@ html_theme_options = {
     ],
     "icon_links": [
         {
-            "name": "Github",
-            "url": "https://github.com/pallets/quart",
+            "name": "Quart Add-Ons",
+            "url": "https://github.com/Quart-Addons",
             "icon": "fab fa-github",
+        },
+        {
+            "name": "Quart",
+            "url": "https://quart.palletsprojects.com/",
+            "icon": "_static/quart.png",
+            "type": "local",
         },
     ],
 }
