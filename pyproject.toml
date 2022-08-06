@@ -21,7 +21,7 @@ classifiers = [
 license = "MIT"
 readme = "README.md"
 repository = "https://github.com/pallets/quart/"
-documentation = "https://quart.palletsprojects.com"
+documentation = "https://quart-uploads.readthedocs.io/en/latest/"
 packages = [
     { include = "quart_uploads"},
 ]
