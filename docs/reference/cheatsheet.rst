@@ -26,8 +26,8 @@ Basic App
             return redirect(url_for('show', id=rec.id))
         return await render_template('upload.html')
 
-Large or Advanced Application
-------------------------------
+Large Applications
+------------------
 
 youapplication/photos.py
 
@@ -96,8 +96,32 @@ Upload Set
         photos.file_allowed('name.jpg') # If the file is allowed
         photos.extension_allowed('.jpg') # IF the file extension is allowed.
         photos.get_basename('name.jpg') # File basename.
-        await photos.save('photo.jpg') # Save a FileStorage file. 
+        file_name = await photos.save('photo.jpg') # Save a FileStorage file. 
         await photos.resolve_conflict('/uploads', 'photo.jpg') # Resolves filename conflict.
+
+General Utilities
+-----------------
+
+.. code-block:: python
+
+    from quart_uploads import extension, lowercase_ext, addslash
+
+    ext = extension('foo.jpg') # Returns the file extension.
+    lower_ext = lowercase_ext('foo.JPG') # Returns the file extension as lowercase.
+    url = addslash('http://localhost:5000') # Returns url with slash at the end.
+
+FileStorage Testing
+-------------------
+
+.. code-block:: python
+
+    from quart_uploads import UploadSet, TestingFileSorage
+    
+    uset = UploadSet('photos') # Upload Set to use for testing
+    tfs = TestingFileSorage(filename='photo.jpg') # File Storage Testing Object
+    file_name = await uset.save(tfs) # Mock saving the file.
+
+
 
     
 
