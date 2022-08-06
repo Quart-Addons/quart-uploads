@@ -10,7 +10,8 @@ to the frontend of your Quart application.
 It provides a `Blueprint` for the route, which is then registered to
 the app from `configure_uploads`.
 
-.. code-block:: python 
+.. code-block:: python
+    
     uploads_mod = Blueprint('_uploads', __name__, url_prefix='/_uploads')
 
 The actual view is as follows:

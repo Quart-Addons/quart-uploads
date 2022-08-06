@@ -10,6 +10,7 @@ such as Chinese or Japanese, it will return empty filename like ``.jpg``. If you
 files may encounter a situation like this, you have to set it's name or generate 
 random filename:
 
-.. code-block:: python 
-    uset.save(file, name='photo_123.')
+.. code-block:: python
+
+    await uset.save(file, name='photo_123.')
     # If name ends with a dot, the file's extension will be appended to the end.

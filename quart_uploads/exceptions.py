@@ -16,9 +16,12 @@ class AllExcept(object):
     """
     This can be used to allow all file types except certain ones. For example,
     to ban .exe and .iso files, pass::
+
         AllExcept(('exe', 'iso'))
+
     to the `UploadSet` constructor as `extensions`. You can use any container,
     for example::
+
         AllExcept(SCRIPTS + EXECUTABLES)
     """
     def __init__(self, items):

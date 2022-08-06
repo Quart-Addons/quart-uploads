@@ -27,6 +27,7 @@ def lowercase_ext(filename: str) -> str:
     This is a helper used by UploadSet.save to provide lowercase extensions for
     all processed files, to compare with configured extensions in the same
     case.
+
     :param filename: The filename to ensure has a lowercase extension.
     """
     if '.' in filename:
@@ -52,17 +53,19 @@ class TestingFileStorage(FileStorage):
     can manually create it, and its save method is overloaded to set `saved`
     to the name of the file it was saved to. All of these parameters are
     optional, so only bother setting the ones relevant to your application.
+
     :param stream: A stream. The default is an empty stream.
     :param filename: The filename uploaded from the client. The default is the
-                     stream's name.
+        stream's name.
     :param name: The name of the form field it was loaded from. The default is
-                 `None`.
+        `None`.
     :param content_type: The content type it was uploaded as. The default is
-                         ``application/octet-stream``.
+        ``application/octet-stream``.
     :param content_length: How long it is. The default is -1.
     :param headers: Multipart headers as a `werkzeug.Headers`. The default is
-                    `None`.
+        `None`.
     """
+
     def __init__(self, stream=None, filename=None, name=None,
                  content_type='application/octet-stream', content_length=-1,
                  headers=None):
@@ -75,9 +78,11 @@ class TestingFileStorage(FileStorage):
         """
         This marks the file as saved by setting the `saved` attribute to the
         name of the file it was saved to.
+
         :param destination: The file to save to.
         :param buffer_size: Ignored.
         """
+
         await asyncio.sleep(0.2)
 
         if isinstance(destination, str):

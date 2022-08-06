@@ -16,13 +16,16 @@ release = '0.0.1'
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = ['sphinx.ext.napoleon','sphinx.ext.autodoc']
+extensions = [
+    'sphinx.ext.napoleon',
+    'sphinx.ext.autodoc'
+]
 
 autodoc_default_options = {
     'member-order': 'bysource',
 }
 
-autodoc_mock_imports = [""]
+autodoc_preserve_defaults = True
 templates_path = ['_templates']
 exclude_patterns = ['_build']
 

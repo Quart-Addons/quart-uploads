@@ -23,15 +23,16 @@ class UploadConfiguration:
     """
     This holds the configuration for a single `UploadSet`. The constructor's
     arguments are also the attributes.
+
     :param destination: The directory to save files to.
     :param base_url: The URL (ending with a /) that files can be downloaded
-                     from. If this is `None`, Quart-Uploads will serve the
-                     files itself.
+        from. If this is `None`, Quart-Uploads will serve the files itself.
     :param allow: A tuple of extensions to allow, even if they're not in the
-                  `UploadSet` extensions list.
+        `UploadSet` extensions list.
     :param deny: A tuple of extensions to deny, even if they are in the
-                 `UploadSet` extensions list.
+        `UploadSet` extensions list.
     """
+
     destination: str
     base_url: Optional[str] = None
     allow: tuple = ()
@@ -55,12 +56,14 @@ def config_for_set(
     """
     This is a helper function for `configure_uploads` that extracts the
     configuration for a single set.
+
     :param uset: The upload set.
     :param app: The app to load the configuration from.
     :param defaults: A dict with keys `url` and `dest` from the
                      `UPLOADS_DEFAULT_DEST` and `DEFAULT_UPLOADS_URL`
                      settings.
     """
+
     config = app.config
     prefix = f'UPLOADED_{uset.name.upper()}_'
     using_defaults = False
@@ -98,9 +101,11 @@ def configure_uploads(app: Quart, upload_sets: Union[UploadSet, tuple[UploadSet,
     can be called multiple times with different upload sets. The uploads
     module/blueprint will only be registered if it is needed to serve the
     upload sets.
-    :param app: The `~flask.Flask` instance to get the configuration from.
+
+    :param app: The `~quart.Quart` instance to get the configuration from.
     :param upload_sets: The `UploadSet` instances to configure.
     """
+
     if isinstance(upload_sets, UploadSet):
         upload_sets = (upload_sets,)
 

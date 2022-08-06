@@ -7,7 +7,7 @@ from __future__ import print_function
 from .config import UploadConfiguration, config_for_set, configure_uploads
 from .exceptions import UploadNotAllowed, AllExcept
 from .file_ext import (TEXT, DOCUMENTS, IMAGES, AUDIO, DATA, SCRIPTS,
-                       ARCHIVES, SOURCE, EXECUTABLES, DEFAULTS, ALL)
+                       ARCHIVES, SOURCE, EXECUTABLES, DEFAULTS, All, ALL)
 from .set import UploadSet
 from .utils import extension, lowercase_ext, addslash, TestingFileStorage
 
@@ -24,6 +24,7 @@ __all__ = [
     'SOURCE',
     'EXECUTABLES',
     'DEFAULTS',
+    'All',
     'ALL',
     'UploadSet',
     'extension',
