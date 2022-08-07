@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}Add a new post{% endblock title %}
+
+{% block body %}
+
+<div class="col-md-12">
+    <h2>New Post</h2>
+
+    <form action="{{ url_for('new') }}" method=POST enctype=multipart/form-data>
+        <div class="row">
+            <div class="col-sm-12">
+                <input type="text" name="title" class="form-control" placeholder="title">
+            </div>
+            <div class="col-sm-12">
+                <input type="file" name="file" class="form-control" placeholder="file">
+            </div>
+            <div class="col-sm-12">
+                <textarea name="caption" class="form-control" rows="5" placeholder="Enter a caption."></textarea>
+            </div>
+            <div class="col-sm-12">
+                <input type="submit" value="Post">
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock body %}
