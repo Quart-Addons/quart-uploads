@@ -15,3 +15,13 @@ package manager.
 .. note::
     If you do not have Python 3.7 or better an error message ``Python 3.7
     is the minimum required version`` will be displayed.
+
+Dependencies
+------------
+
+Quart Uploads depends on the following packages, which will automatically
+be installed with the extension.
+
+- `Quart <https://quart.palletsprojects.com>`_
+- `aiofiles<https://github.com/Tinche/aiofiles>`_ , to load files in an asyncio compatiable manner.
+

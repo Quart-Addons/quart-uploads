@@ -21,7 +21,15 @@ Quart-Uploads is developed on github, `here <https://github.com/Quart-Addons/qua
 
 For more information on Quart, `visit here <https://quart.palletsprojects.com/en/latest/>`_ .
 
-Quart-Uploads is based on `Flask-Uploads <https://github.com/maxcountryman/flask-uploads>`_ by maxcountryman. 
+Quart-Uploads is based on `Flask-Uploads <https://github.com/maxcountryman/flask-uploads>`_ by maxcountryman.
+
+Tutorials
+---------
+
+.. toctree::
+   :maxdepth: 2
+
+   tutorials/index.rst
 
 How to guides
 -------------
