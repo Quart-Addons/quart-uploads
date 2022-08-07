@@ -5,7 +5,8 @@ This is a simple example app for Quart-Uploads. It is a
 simple photolog app that lets you submit blog posts that
 are photos.
 """
-from quart import flask_patch
+import shutil
+import quart.flask_patch
 from quart import (Quart, request, url_for, redirect, render_template,
                   flash, session, g)
 from flask_sqlalchemy import SQLAlchemy
@@ -30,6 +31,10 @@ app.config.from_object(__name__)
 # uploads
 uploaded_photos = UploadSet('photos', IMAGES)
 configure_uploads(app, uploaded_photos)
+
+def remove_photo_dir() -> None:
+    """Remove photo dir"""
+    shutil.rmtree(UPLOADED_PHOTOS_DEST)
 
 # database
 db = SQLAlchemy(app)
@@ -65,10 +70,10 @@ def login_handle():
 
 # views
 @app.route('/')
-def index():
+async def index():
     """Index route."""
     posts = Post.query.order_by(Post.created.desc()).all()
-    return render_template('index.html', posts=posts)
+    return await render_template('index.html', posts=posts)
 
 
 @app.route('/new', methods=['GET', 'POST'])
@@ -86,11 +91,11 @@ async def new():
             try:
                 filename = await uploaded_photos.save(photo)
             except UploadNotAllowed:
-                await flash("The upload was not allowed")
+                await flash("The upload was not allowed", "danger")
             else:
                 db.session.add(Post(title=title, caption=caption, filename=filename))
                 db.session.commit()
-                await flash("Post successful")
+                await flash("Post successful", "success")
                 return to_index()
     return await render_template('new.html')
 
@@ -108,10 +113,10 @@ async def login():
         if (username == app.config['ADMIN_USERNAME'] and
             password == app.config['ADMIN_PASSWORD']):
             session['logged_in'] = True
-            await flash("Successfully logged in")
+            await flash("Successfully logged in", "success")
             return to_index()
         else:
-            await flash("Those credentials were incorrect")
+            await flash("Those credentials were incorrect", "danger")
     return await render_template('login.html')
 
 
@@ -120,9 +125,9 @@ async def logout():
     """User logout route."""
     if session.get('logged_in'):
         session['logged_in'] = False
-        await flash("Successfully logged out")
+        await flash("Successfully logged out", "success")
     else:
-        await flash("You weren't logged in to begin with")
+        await flash("You weren't logged in to begin with", "warning")
     return to_index()
 
 
