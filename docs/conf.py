@@ -2,8 +2,8 @@
 #
 # For the full list of built-in configuration values, see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
-import os 
-import sys 
+import os
+import sys
 
 sys.path.insert(0, os.path.abspath("../"))
 
@@ -16,10 +16,7 @@ release = '0.0.1'
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = [
-    'sphinx.ext.napoleon',
-    'sphinx.ext.autodoc'
-]
+extensions = ['sphinx.ext.napoleon', 'sphinx.ext.autodoc']
 
 autodoc_default_options = {
     'member-order': 'bysource',
@@ -40,7 +37,6 @@ master_doc = 'index'
 
 html_theme = 'pydata_sphinx_theme'
 html_logo = "_static/logo_short.png"
-html_theme_path = ['_themes']
 html_static_path = ['_static']
 htmlhelp_basename = 'QuartUploadsdoc'
 
