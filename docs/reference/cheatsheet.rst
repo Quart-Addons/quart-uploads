@@ -29,9 +29,8 @@ Basic App
 Large Applications
 ------------------
 
-youapplication/photos.py
-
 .. code-block:: python
+    :caption: yourapplication/photos.py
 
     from quart import Blueprint 
     from quart_uploads import UploadSet, IMAGES
@@ -42,9 +41,8 @@ youapplication/photos.py
 
     # Routes & additional code here. 
 
-yourapplication/audio.py
-
 .. code-block:: python
+    :caption: youapplication/audio.py
 
     from quart import Blueprint 
     from quart_uploads import UploadSet, AUDIO
@@ -55,9 +53,8 @@ yourapplication/audio.py
 
     # Routes & additional code here.
 
-youapplication/app.py
-
 .. code-block:: python
+    :caption: youapplication/app.py
 
     from quart import Quart
     from quart_uploads import configure_uploads
@@ -77,6 +74,8 @@ youapplication/app.py
         usets = (photos, audio)
         configure_uploads(app, usets)
 
+        # Other app registration here. 
+        
         return app
 
 Upload Set 

@@ -6,4 +6,4 @@ Tutorials
    :maxdepth: 1
 
    installation.rst
-   photologo.rst
+   photolog.rst
