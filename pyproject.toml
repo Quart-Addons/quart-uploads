@@ -2,7 +2,7 @@
 name = "quart-uploads"
 version = "0.0.1"
 description = ""
-authors = ["Chris Rood <crood58@gmail.com>"]
+authors = ["Chris Rood <quart.addons@gmail.com>"]
 license = "MIT"
 classifiers = [
     "Development Status :: 4 - Beta",
