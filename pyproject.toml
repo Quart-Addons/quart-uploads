@@ -34,7 +34,7 @@ quart = "*"
 [tool.poetry.dev-dependencies]
 pytest = "*"
 pytest-asyncio = "*"
-sphinx = "*"
+sphinx = "5.1.1"
 pydata_sphinx_theme = "*"
 
 [tool.poetry.extras]
