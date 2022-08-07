@@ -1,8 +1,9 @@
 [tool.poetry]
-name = "Quart Uploads"
+name = "quart-uploads"
 version = "0.0.1"
-description = "File upload handling for Quart."
+description = ""
 authors = ["Chris Rood <crood58@gmail.com>"]
+license = "MIT"
 classifiers = [
     "Development Status :: 4 - Beta",
     "Environment :: Web Environment",
@@ -18,27 +19,23 @@ classifiers = [
     "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
-license = "MIT"
 readme = "README.md"
-repository = "https://github.com/pallets/quart/"
-documentation = "https://quart-uploads.readthedocs.io/en/latest/"
+repository = "https://github.com/Quart-Addons/quart-uploads"
+documentation = "https://quart-uploads.readthedocs.io/"
 packages = [
     { include = "quart_uploads"},
 ]
 
 [tool.poetry.dependencies]
-python = "3.10"
-aiofiles = "*"
-quart = "*"
+python = "^3.10"
+aiofiles = "^0.8.0"
+quart = "^0.18.0"
 
 [tool.poetry.dev-dependencies]
-pytest = "*"
-pytest-asyncio = "*"
-sphinx = "*"
-pydata_sphinx_theme = "*"
-
-[tool.poetry.extras]
-docs = ["pydata_sphinx_theme"]
+pytest = "^7.1.2"
+pytest-asyncio = "^0.19.0"
+Sphinx = "^5.1.1"
+pydata-sphinx-theme = "^0.9.0"
 
 [tool.black]
 line-length = 100
