@@ -8,4 +8,3 @@ This is the example code for the photolog tutorial. It is managed using
 
     poetry install
     poetry run start
-    poetry run pytest -c pyproject.toml tests/
