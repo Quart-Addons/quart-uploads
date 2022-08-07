@@ -16,6 +16,7 @@ pytest = "*"
 pytest-asyncio = "*"
 
 [tool.poetry.scripts]
+photo_rm = "photolog:remove_photo_dir"
 init_db = "photolog:init_db"
 start = "photolog:run"
 
