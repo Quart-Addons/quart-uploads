@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "quart-uploads"
-version = "0.0.1"
+version = "0.0.2"
 description = ""
 authors = ["Chris Rood <quart.addons@gmail.com>"]
 license = "MIT"
