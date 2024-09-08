@@ -4,32 +4,23 @@ quart_uploads
 from __future__ import absolute_import
 from __future__ import print_function
 
-from .config import UploadConfiguration, config_for_set, configure_uploads
+
+from .config import UploadConfig, configure_uploads
+from .core import Uploads
 from .exceptions import UploadNotAllowed, AllExcept
-from .file_ext import (TEXT, DOCUMENTS, IMAGES, AUDIO, DATA, SCRIPTS,
-                       ARCHIVES, SOURCE, EXECUTABLES, DEFAULTS, All, ALL)
+from .file_ext import FileExtensions, ALL
 from .set import UploadSet
-from .utils import extension, lowercase_ext, addslash, TestingFileStorage
+from .utils import TestingFileStorage
 
 __all__ = [
-    'config_for_set',
+    'UploadConfig',
     'configure_uploads',
-    'TEXT',
-    'DOCUMENTS',
-    'IMAGES',
-    'AUDIO',
-    'DATA',
-    'SCRIPTS',
-    'ARCHIVES',
-    'SOURCE',
-    'EXECUTABLES',
-    'DEFAULTS',
-    'All',
+    'Uploads',
+    'UploadNotAllowed',
+    'FileExtensions',
     'ALL',
+    'AllExcept',
     'UploadSet',
-    'extension',
-    'lowercase_ext',
-    'addslash',
     'TestingFileStorage'
     ]
 """
