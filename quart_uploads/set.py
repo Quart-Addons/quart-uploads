@@ -3,21 +3,24 @@ quart_uploads.set
 
 Defines the upload set class.
 """
-
+from __future__ import annotations
 import os
 import posixpath
-from typing import Optional
+from typing import Optional, TYPE_CHECKING
 
-import aiofiles.os
+import aiofiles
 from quart import current_app, url_for
 from quart.datastructures import FileStorage
 from werkzeug.utils import secure_filename
 
 from .exceptions import UploadNotAllowed
-from .file_ext import DEFAULTS
+from .file_ext import FileExtensions as FE
 from .utils import extension, lowercase_ext
 
-__all__ = ['UploadSet']
+if TYPE_CHECKING:
+    from .core import Uploads
+    from .config import UploadConfig
+
 
 class UploadSet(object):
     """
@@ -26,36 +29,36 @@ class UploadSet(object):
     instances, as all configuration is stored on the application object itself
     and found with `quart.current_app`.
 
-    :param name: The name of this upload set. It defaults to ``files``, but
-                 you can pick any alphanumeric name you want. (For simplicity,
-                 it's best to use a plural noun.)
-    :param extensions: The extensions to allow uploading in this set. The
-                       easiest way to do this is to add together the extension
-                       presets (for example, ``TEXT + DOCUMENTS + IMAGES``).
-                       It can be overridden by the configuration with the
-                       `UPLOADED_X_ALLOW` and `UPLOADED_X_DENY` configuration
-                       parameters. The default is `DEFAULTS`.
-    :param default_dest: If given, this should be a callable. If you call it
-                         with the app, it should return the default upload
-                         destination path for that app.
+    Arguments:
+        name: The name of this upload set. It defaults to ``files``, but
+              you can pick any alphanumeric name you want. (For simplicity,
+              it's best to use a plural noun.)
+        extensions: The extensions to allow uploading in this set. The
+                    easiest way to do this is to add together the extension
+                    presets (for example, ``TEXT + DOCUMENTS + IMAGES``).
+                    It can be overridden by the configuration with the
+                    `UPLOADED_X_ALLOW` and `UPLOADED_X_DENY` configuration
+                    parameters. The default is `DEFAULTS`.
+        default_dest: If given, this should be a callable. If you call it
+                      with the app, it should return the default upload
+                      destination path for that app.
     """
 
     def __init__(
         self,
-        name: str='files',
-        extensions: tuple = DEFAULTS,
-        default_dest: Optional[str]=None
-        ) -> None:
+        name: str = 'files',
+        extensions: tuple = FE.DEFAULTS,
+        default_dest: Optional[str] = None
+    ) -> None:
         if not name.isalnum():
             raise ValueError("Name must be alphanumeric (no underscores)")
 
         self.name: str = name
         self.extensions: tuple = extensions
-        self._config = None
         self.default_dest: str = default_dest
 
     @property
-    def config(self):
+    def config(self) -> UploadConfig:
         """
         This gets the current configuration. By default, it looks up the
         current application and gets the configuration from there. But if you
@@ -64,14 +67,10 @@ class UploadSet(object):
         an `UploadConfiguration` instance, then set it back to `None` when
         you're done.
         """
-        if self._config is not None:
-            return self._config
-        try:
-            return current_app.upload_set_config[self.name]
-        except AttributeError as outside_request:
-            raise RuntimeError("cannot access configuration outside request") from outside_request
+        uploads: Uploads = current_app.extensions['uploads']
+        return uploads.get(self.name)
 
-    def url(self, filename:str) -> str:
+    def url(self, filename: str) -> str:
         """
         This function gets the URL a file uploaded to this set would be
         accessed at. It doesn't check whether said file exists.
@@ -85,13 +84,14 @@ class UploadSet(object):
         else:
             return base + filename
 
-    def path(self, filename: str, folder: Optional[str]=None) -> str:
+    def path(self, filename: str, folder: Optional[str] = None) -> str:
         """
         This returns the absolute path of a file uploaded to this set. It
         doesn't actually check whether said file exists.
 
         :param filename: The filename to return the path for.
-        :param folder: The subfolder within the upload set previously used to save to.
+        :param folder: The subfolder within the upload set previously
+                       used to save to.
         """
 
         if folder is not None:
@@ -124,26 +124,25 @@ class UploadSet(object):
             if (ext in self.config.allow) or (ext not in self.config.deny):
                 return True
         else:
-            return ((ext in self.config.allow) or
-                    (ext in self.extensions and ext not in self.config.deny))
+            return (ext in self.config.allow) or (ext in self.extensions and ext not in self.config.deny)
 
-    def get_basename(self, filename:str) -> str:
+    def get_basename(self, filename: str) -> str:
         """
         Returns the file basename.
         """
         return lowercase_ext(secure_filename(filename))
 
     async def save(
-    self,
-    storage: FileStorage,
-    folder: Optional[str]=None,
-    name: Optional[str]=None
+        self,
+        storage: FileStorage,
+        folder: Optional[str] = None,
+        name: Optional[str] = None
     ) -> str:
         """
-        This coroutine saves a `werkzeug.FileStorage` into this upload set. If the
-        upload is not allowed, an `UploadNotAllowed` error will be raised.
-        Otherwise, the file will be saved and its name (including the folder)
-        will be returned.
+        This coroutine saves a `werkzeug.FileStorage` into this upload set.
+        If the upload is not allowed, an `UploadNotAllowed` error will be
+        raised. Otherwise, the file will be saved and its name (including
+        the folder) will be returned.
 
         :param storage: The uploaded file to save.
         :param folder: The subfolder within the upload set to save to.
@@ -171,8 +170,6 @@ class UploadSet(object):
             else:
                 basename = name
 
-
-
         if folder:
             target_folder = os.path.join(self.config.destination, folder)
         else:
@@ -181,7 +178,9 @@ class UploadSet(object):
         if not await aiofiles.os.path.exists(target_folder):
             await aiofiles.os.makedirs(target_folder)
 
-        if await aiofiles.os.path.exists(os.path.join(target_folder, basename)):
+        if await aiofiles.os.path.exists(
+            os.path.join(target_folder, basename)
+        ):
             basename = await self.resolve_conflict(target_folder, basename)
 
         target = os.path.join(target_folder, basename)
@@ -211,5 +210,7 @@ class UploadSet(object):
         while True:
             count = count + 1
             newname = f'{name}_{count}{ext}'
-            if not await aiofiles.os.path.exists(os.path.join(target_folder, newname)):
+            if not await aiofiles.os.path.exists(
+                os.path.join(target_folder, newname)
+            ):
                 return newname
