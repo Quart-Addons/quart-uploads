@@ -3,10 +3,11 @@ quart_uploads.utils
 """
 import asyncio
 import os
+from typing import Any, IO
 
 from quart.datastructures import FileStorage
+from werkzeug.datastructures import Headers
 
-__all__ = ['extension', 'lowercase_ext', 'addslash', 'TestingFileStorage']
 
 def extension(filename: str) -> str:
     """
@@ -47,6 +48,7 @@ def addslash(url: str) -> str:
         return url
     return url + '/'
 
+
 class TestingFileStorage(FileStorage):
     """
     This is a helper for testing upload behavior in your application. You
@@ -65,16 +67,22 @@ class TestingFileStorage(FileStorage):
     :param headers: Multipart headers as a `werkzeug.Headers`. The default is
         `None`.
     """
+    def __init__(
+            self, stream: IO[bytes] | None = None,
+            filename: str | None = None,
+            name: str | None = None,
+            content_type: str | None = None,
+            content_length: int | None = None,
+            headers: Headers | None = None
+    ) -> None:
+        super().__init__(
+            stream, filename, name, content_type, content_length, headers
+        )
+        self.saved: Any | None = None
 
-    def __init__(self, stream=None, filename=None, name=None,
-                 content_type='application/octet-stream', content_length=-1,
-                 headers=None):
-        FileStorage.__init__(self, stream, filename, name=name,
-            content_type=content_type, content_length=content_length,
-            headers=None)
-        self.saved = None
-
-    async def save(self, destination, buffer_size=16384):
+    async def save(
+            self, destination: Any, buffer_size: int = 16384
+    ) -> None:
         """
         This marks the file as saved by setting the `saved` attribute to the
         name of the file it was saved to.
@@ -82,7 +90,6 @@ class TestingFileStorage(FileStorage):
         :param destination: The file to save to.
         :param buffer_size: Ignored.
         """
-
         await asyncio.sleep(0.2)
 
         if isinstance(destination, str):

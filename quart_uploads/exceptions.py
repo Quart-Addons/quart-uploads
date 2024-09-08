@@ -1,16 +1,15 @@
 """
 quart_uploads.exceptions
-
-Provides exceptions for the app.
 """
+from typing import Any
 
-__all__ = ['UploadNotAllowed', 'AllExcept']
 
 class UploadNotAllowed(Exception):
     """
     This exception is raised if the upload was not allowed. You should catch
     it in your view code and display an appropriate message to the user.
     """
+
 
 class AllExcept(object):
     """
@@ -24,8 +23,8 @@ class AllExcept(object):
 
         AllExcept(SCRIPTS + EXECUTABLES)
     """
-    def __init__(self, items):
+    def __init__(self, items: Any) -> None:
         self.items = items
 
-    def __contains__(self, item):
+    def __contains__(self, item: Any) -> bool:
         return item not in self.items
