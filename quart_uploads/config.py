@@ -7,13 +7,12 @@ helper functions for the extension.
 """
 from __future__ import annotations
 import os
-
+from collections import UserDict
 from dataclasses import dataclass, astuple
 from typing import Any, Dict, Optional, Union
 
 from quart import Quart
 
-from .core import Uploads
 from .route import uploads_mod
 from .set import UploadSet
 from .utils import addslash
@@ -49,6 +48,44 @@ class UploadConfig:
 
     def __eq__(self, other: Any) -> bool:
         return self.tuple == other.tuple
+
+
+MUST_BE_STRING = 'The key must be a string value.'
+MUST_BE_CONFIG = 'The item must be an `UploadConfig` object.'
+
+
+class Uploads(UserDict):
+    """
+    Custom dictionary for storing `UploadConfig` objects on the
+    `Quart` application.
+
+    This will be stored at `Quart.extensions`.
+    """
+    def __init__(self, app: Quart) -> None:
+        super().__init__()
+        app.extensions['uploads'] = self
+
+    def __getitem__(self, key: str) -> UploadConfig:
+        if not isinstance(key, str):
+            raise TypeError(MUST_BE_STRING)
+        return super().__getitem__(key)
+
+    def __setitem__(self, key: str, item: UploadConfig) -> None:
+        if not isinstance(key, str):
+            raise TypeError(MUST_BE_STRING)
+        if not isinstance(item, UploadConfig):
+            raise TypeError(MUST_BE_CONFIG)
+        super().__setitem__(key, item)
+
+    def __delitem__(self, key: str) -> None:
+        if not isinstance(key, str):
+            raise TypeError(MUST_BE_STRING)
+        return super().__delitem__(key)
+
+    def get(self, key: str, default: Any | None = None) -> UploadConfig | None:
+        if key in self:
+            return self[key]
+        return default
 
 
 def config_for_set(

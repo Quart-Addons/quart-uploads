@@ -10,8 +10,7 @@ from quart import Quart
 if TYPE_CHECKING:
     from .config import UploadConfig
 
-MUST_BE_STRING = 'The key must be a string value.'
-MUST_BE_CONFIG = 'The item must be an `UploadConfig` object.'
+
 
 
 class Uploads(UserDict):
