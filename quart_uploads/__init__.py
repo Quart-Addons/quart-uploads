@@ -8,7 +8,7 @@ from __future__ import print_function
 from .config import UploadConfig, configure_uploads
 from .core import Uploads
 from .exceptions import UploadNotAllowed, AllExcept
-from .file_ext import FileExtensions, ALL
+from .file_ext import FILE_EXTENSIONS as FE, ALL
 from .set import UploadSet
 from .utils import TestingFileStorage
 
@@ -17,7 +17,7 @@ __all__ = [
     'configure_uploads',
     'Uploads',
     'UploadNotAllowed',
-    'FileExtensions',
+    'FE',
     'ALL',
     'AllExcept',
     'UploadSet',

@@ -2,7 +2,7 @@
 quart_uploads.file_ext
 """
 from __future__ import annotations
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Any, Tuple
 
 
@@ -85,10 +85,10 @@ class FileExtensions:
 
     @property
     def DEFAULTS(self) -> Tuple[str]:
-        """
-        The default allowed file extensions.
-        """
-        return self.TEXT + self.DOCUMENTS + self.DATA
+        return self.TEXT + self.DOCUMENTS + self.IMAGES
+
+
+FILE_EXTENSIONS = FileExtensions()
 
 
 class All(object):
