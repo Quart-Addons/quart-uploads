@@ -4,35 +4,11 @@
 Default File Extensions
 =======================
 
-.. autodata:: quart_uploads.TEXT
-    :annotation:
+.. autoclass:: quart_uploads.FileExtensions
+    :members:
 
-.. autodata:: quart_uploads.DOCUMENTS
-    :annotation:
-
-.. autodata:: quart_uploads.IMAGES
-    :annotation:
-
-.. autodata:: quart_uploads.AUDIO
-    :annotation:
-
-.. autodata:: quart_uploads.DATA
-    :annotation:
-
-.. autodata:: quart_uploads.SCRIPTS
-    :annotation:
-
-.. autodata:: quart_uploads.ARCHIVES
-    :annotation:
-
-.. autodata:: quart_uploads.SOURCE
-    :annotation:
-
-.. autodata:: quart_uploads.EXECUTABLES
-    :annotation:
-
-.. autodata:: quart_uploads.DEFAULTS
-    :annotation:
+.. autodata:: quart_uploads.FILE_EXTENSIONS
+    :annotation: This a default variable of `FileExtensions`.
 
 .. autoclass:: quart_uploads.All
     :members:

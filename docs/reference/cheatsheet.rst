@@ -10,11 +10,11 @@ Basic App
 .. code-block:: python
 
     from quart import Quart, render_template
-    from quart_uploads import UploadSet, configure_uploads, IMAGES
+    from quart_uploads import UploadSet, configure_uploads, FE
 
     app = Quart(__name__)
 
-    photos = UploadSet('photos', IMAGES)
+    photos = UploadSet('photos', FE.Images)
     configure_uploads(app, photos)
 
     @app.route("/hello")
@@ -33,11 +33,11 @@ Large Applications
     :caption: yourapplication/photos.py
 
     from quart import Blueprint 
-    from quart_uploads import UploadSet, IMAGES
+    from quart_uploads import UploadSet, FE
 
     bp = Blueprint('photos', __name__, url_prefix='/photos')
 
-    photos = UploadSet('photos', IMAGES)
+    photos = UploadSet('photos', FE.Images)
 
     # Routes & additional code here. 
 
@@ -45,11 +45,11 @@ Large Applications
     :caption: youapplication/audio.py
 
     from quart import Blueprint 
-    from quart_uploads import UploadSet, AUDIO
+    from quart_uploads import UploadSet, FE
 
     bp = Blueprint('audio', __name__, url_prefix='/audio')
 
-    audio = UploadSet('audio', AUDIO)
+    audio = UploadSet('audio', FE.Audio)
 
     # Routes & additional code here.
 
@@ -69,7 +69,7 @@ Large Applications
         from .audio import bp as audio_bp
         app.register_blueprint(audio_bp)
 
-        from .phtoto import photos
+        from .photo import photos
         from .audio import audio
         usets = (photos, audio)
         configure_uploads(app, usets)
@@ -83,9 +83,9 @@ Upload Set
 
 .. code-block:: python 
     
-    from quart_uploads import UploadSet, IMAGES
+    from quart_uploads import UploadSet, FE
 
-    photos = UploadSet('photos', IMAGES)photos = UploadSet('photos', IMAGES)
+    photos = UploadSet('photos', FE.Images)photos = UploadSet('photos', FE.Images)
 
     @app.route('/upload', methods=['GET', 'POST'])
     async def some_route():
@@ -98,16 +98,6 @@ Upload Set
         file_name = await photos.save('photo.jpg') # Save a FileStorage file. 
         await photos.resolve_conflict('/uploads', 'photo.jpg') # Resolves filename conflict.
 
-General Utilities
------------------
-
-.. code-block:: python
-
-    from quart_uploads import extension, lowercase_ext, addslash
-
-    ext = extension('foo.jpg') # Returns the file extension.
-    lower_ext = lowercase_ext('foo.JPG') # Returns the file extension as lowercase.
-    url = addslash('http://localhost:5000') # Returns url with slash at the end.
 
 FileStorage Testing
 -------------------
@@ -119,14 +109,3 @@ FileStorage Testing
     uset = UploadSet('photos') # Upload Set to use for testing
     tfs = TestingFileSorage(filename='photo.jpg') # File Storage Testing Object
     file_name = await uset.save(tfs) # Mock saving the file.
-
-
-
-    
-
-
-
-
-
-
-

@@ -4,10 +4,7 @@
 Utilities
 ==========
 
-.. autofunction:: quart_uploads.extension
-
-.. autofunction:: quart_uploads.lowercase_ext
-
-.. autofunction:: quart_uploads.addslash 
+.. autoclass:: quart_uploads.Uploads
+    :members:
 
 .. autofunction:: quart_uploads.TestingFileStorage
