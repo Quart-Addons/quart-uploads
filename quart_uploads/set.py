@@ -5,16 +5,17 @@ Defines the upload set class.
 """
 from __future__ import annotations
 import os
+import pathlib
 import posixpath
-from typing import Optional, TYPE_CHECKING
+from typing import Callable, Optional, Tuple, Union, TYPE_CHECKING
 
 import aiofiles
-from quart import current_app, url_for
+from quart import Quart, current_app, url_for
 from quart.datastructures import FileStorage
 from werkzeug.utils import secure_filename
 
 from .exceptions import UploadNotAllowed
-from .file_ext import FileExtensions as FE
+from .file_ext import FILE_EXTENSIONS as FE, All
 from .utils import extension, lowercase_ext
 
 if TYPE_CHECKING:
@@ -47,15 +48,17 @@ class UploadSet(object):
     def __init__(
         self,
         name: str = 'files',
-        extensions: tuple = FE.DEFAULTS,
-        default_dest: Optional[str] = None
+        extensions: Union[Tuple[str], All] = FE.Defaults,
+        default_dest: Optional[Union[str, Callable[[Quart], str]]] = None
     ) -> None:
         if not name.isalnum():
             raise ValueError("Name must be alphanumeric (no underscores)")
 
-        self.name: str = name
-        self.extensions: tuple = extensions
-        self.default_dest: str = default_dest
+        self.name = name
+        self.extensions = extensions
+        self.default_dest = default_dest
+
+        self._config: UploadConfig | None = None
 
     @property
     def config(self) -> UploadConfig:
@@ -67,8 +70,11 @@ class UploadSet(object):
         an `UploadConfiguration` instance, then set it back to `None` when
         you're done.
         """
-        uploads: Uploads = current_app.extensions['uploads']
-        return uploads.get(self.name)
+        if self._config is None:
+            uploads: Uploads = current_app.extensions['uploads']
+            self._config = uploads.get(self.name)
+
+        return self._config
 
     def url(self, filename: str) -> str:
         """
@@ -120,11 +126,8 @@ class UploadSet(object):
 
         :param ext: The extension to check, without the dot.
         """
-        if not self.extensions:
-            if (ext in self.config.allow) or (ext not in self.config.deny):
-                return True
-        else:
-            return (ext in self.config.allow) or (ext in self.extensions and ext not in self.config.deny)
+        return ((ext in self.config.allow) or
+                (ext in self.extensions and ext not in self.config.deny))
 
     def get_basename(self, filename: str) -> str:
         """
@@ -184,6 +187,7 @@ class UploadSet(object):
             basename = await self.resolve_conflict(target_folder, basename)
 
         target = os.path.join(target_folder, basename)
+        target = pathlib.Path(target)
 
         await storage.save(target)
 

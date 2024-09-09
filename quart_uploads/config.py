@@ -82,8 +82,11 @@ def config_for_set(
     if destination is None:
         # the upload set's destination wasn't given
         if uset.default_dest:
-            # use the "default_dest" callable
-            destination = uset.default_dest(app)
+            if callable(uset.default_dest):
+                # default destination is a callable.
+                destination = uset.default_dest(app)
+            else:
+                destination = uset.default_dest
         if destination is None:  # still
             # use the default dest from the config
             if defaults['dest'] is not None:

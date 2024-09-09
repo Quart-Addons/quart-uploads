@@ -2,7 +2,7 @@
 quart_uploads.file_ext
 """
 from __future__ import annotations
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Any, Tuple
 
 
@@ -12,34 +12,34 @@ class FileExtensions:
     A dataclass for holding file extensions for different file types.
     """
     #: This just contains plain text files (.txt).
-    TEXT: tuple = ('txt',)
+    Text: tuple = ('txt',)
 
     #: This contains various office document formats (.rtf, .odf, .ods,
     # .gnumeric, .abw, .doc, .docx, .xls, .xlsx and .pdf). Note that the
     # macro-enabled versions of Microsoft Office 2007 files are not included.
-    DOCUMENTS = tuple('rtf odf ods gnumeric abw doc docx xls xlsx pdf'.split())
+    Documents = tuple('rtf odf ods gnumeric abw doc docx xls xlsx pdf'.split())
 
     #: This contains basic image types that are viewable from most browsers
     # (.jpg, .jpe, .jpeg, .png, .gif, .svg, .bmp and .webp).
-    IMAGES = tuple('jpg jpe jpeg png gif svg bmp webp'.split())
+    Images = tuple('jpg jpe jpeg png gif svg bmp webp'.split())
 
     #: This contains audio file types (.wav, .mp3, .aac, .ogg,
     # .oga, and .flac).
-    AUDIO = tuple('wav mp3 aac ogg oga flac'.split())
+    Audio = tuple('wav mp3 aac ogg oga flac'.split())
 
     #: This is for structured data files (.csv, .ini, .json, .plist,
     # .xml, .yaml, and .yml).
-    DATA = tuple('csv ini json plist xml yaml yml'.split())
+    Data = tuple('csv ini json plist xml yaml yml'.split())
 
     #: This contains various types of scripts (.js, .php, .pl,
     # .py .rb, and .sh). If your Web server has PHP installed
     # and set to auto-run, you might want to add ``php`` to the
     # DENY setting.
-    SCRIPTS = tuple('js php pl py rb sh'.split())
+    Scripts = tuple('js php pl py rb sh'.split())
 
     #: This contains archive and compression formats (.gz, .bz2,
     # .zip, .tar, .tgz, .txz, and .7z).
-    ARCHIVES = tuple('gz bz2 zip tar tgz txz 7z'.split())
+    Archives = tuple('gz bz2 zip tar tgz txz 7z'.split())
 
     #: This contains nonexecutable source files - those which need to be
     #: compiled or assembled to binaries to be used. They are generally safe to
@@ -47,7 +47,7 @@ class FileExtensions:
     # compiled, assembled, linked, or executed. Supports C, C++, Ada, Rust, Go
     # (Golang), FORTRAN, D, Java, C Sharp, F Sharp (compiled only), COBOL,
     # Haskell, and assembly.
-    SOURCE = (
+    Source = (
         'c',
         'cpp',
         'c++',
@@ -81,11 +81,16 @@ class FileExtensions:
     # (.so, .exe and .dll). Most of the time, you will not
     # want to allow this - it's better suited for use with
     # `AllExcept`.
-    EXECUTABLES = tuple('so exe dll'.split())
+    Executables = tuple('so exe dll'.split())
 
     @property
-    def DEFAULTS(self) -> Tuple[str]:
-        return self.TEXT + self.DOCUMENTS + self.IMAGES
+    def Defaults(self) -> Tuple[str]:
+        """
+        Returns the default allowed file extensions.
+        It is a combination of text, documents, and
+        images.
+        """
+        return self.Text + self.Documents + self.Images
 
 
 FILE_EXTENSIONS = FileExtensions()

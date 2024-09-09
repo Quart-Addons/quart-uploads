@@ -18,6 +18,8 @@ class Uploads(UserDict):
     """
     Custom dictionary for storing `UploadConfig` objects on the
     `Quart` application.
+
+    This will be stored at `Quart.extensions`.
     """
     def __init__(self, app: Quart) -> None:
         super().__init__()
