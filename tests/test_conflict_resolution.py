@@ -4,7 +4,7 @@ tests.test_conflict_resolution
 import os
 from pathlib import Path
 import pytest
-from quart_uploads import UploadConfig, UploadSet, TestingFileStorage
+from quart_uploads import UploadConfig, UploadSet, TestingFileStorage, ALL
 
 
 def test_self(tmp_path: Path) -> None:
@@ -64,7 +64,7 @@ async def test_multi_condition(tmp_path: Path) -> None:
 
 
 @pytest.mark.asyncio
-async def test_conflict_without_extension(tmp_path: Path) -> None:
+async def test_conflict_without_extension(tmp_path) -> None:
     """
     Test file conflict without file extension.
     """
@@ -72,10 +72,9 @@ async def test_conflict_without_extension(tmp_path: Path) -> None:
     directory.mkdir()
     file = directory / "foo"
     file.write_text("Some foo data.")
-    dest = directory.absolute().as_posix()
 
-    uset = UploadSet('files', extensions=('', ))
-    uset._config = UploadConfig(dest)
+    uset = UploadSet('files', extensions=ALL)
+    uset._config = UploadConfig(directory)
 
     tfs = TestingFileStorage(filename='foo')
     res = await uset.save(tfs)
