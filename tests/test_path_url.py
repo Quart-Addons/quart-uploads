@@ -1,16 +1,17 @@
 """
-Tests paths and urls.
+test.tests_path_url
 """
 import pytest
 from quart import Quart, url_for
-from quart_uploads import UploadConfiguration, UploadSet, configure_uploads
+from quart_uploads import UploadConfig, UploadSet, configure_uploads
 
-def test_path():
+
+def test_path() -> None:
     """
     Tests the file path.
     """
     uset = UploadSet('files')
-    uset._config = UploadConfiguration('/uploads')
+    uset._config = UploadConfig('/uploads')
 
     assert uset.path('foo.txt') == '/uploads/foo.txt'
     assert uset.path('someguy/foo.txt') == '/uploads/someguy/foo.txt'
@@ -19,14 +20,15 @@ def test_path():
     assert (uset.path('foo/bar.txt', folder='someguy') ==
             '/uploads/someguy/foo/bar.txt')
 
+
 @pytest.mark.asyncio
-async def test_url_generated():
+async def test_url_generated() -> None:
     """
     Tests the generated url.
     """
     app = Quart(__name__)
     app.config.update(
-        UPLOADED_FILES_DEST = '/uploads'
+        UPLOADED_FILES_DEST='/uploads'
     )
 
     uset = UploadSet('files')
@@ -38,15 +40,16 @@ async def test_url_generated():
                       filename='foo.txt', _external=True)
         assert url == gen
 
+
 @pytest.mark.asyncio
-async def test_url_base():
+async def test_url_base() -> None:
     """
     Tests the url base.
     """
     app = Quart(__name__)
     app.config.update(
-        UPLOADED_FILES_DEST = '/uploads',
-        UPLOADED_FILES_URL = 'http://localhost:5001/'
+        UPLOADED_FILES_DEST='/uploads',
+        UPLOADED_FILES_URL='http://localhost:5001/'
     )
 
     uset = UploadSet('files')

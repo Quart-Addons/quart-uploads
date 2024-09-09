@@ -1,13 +1,14 @@
 """
-Tests Quart-Uploads Utilities.
+tests.test_misc
 """
 from __future__ import with_statement
 import pytest
-from quart_uploads import (addslash, extension, lowercase_ext,
-                           TestingFileStorage, ALL, AllExcept)
+from quart_uploads import TestingFileStorage, ALL, AllExcept
+from quart_uploads.utils import addslash, extension, lowercase_ext
+
 
 @pytest.mark.asyncio
-async def test_tfs():
+async def test_tfs() -> None:
     """
     File Storage Testing.
     """
@@ -18,16 +19,18 @@ async def test_tfs():
     await tfs.save('foo_bar.txt')
     assert tfs.saved == 'foo_bar.txt'
 
-def test_extension():
+
+def test_extension() -> None:
     """
     Test extension utility function.
     """
     assert extension('foo.txt') == 'txt'
-    assert extension('foo') is not ''
+    assert extension('foo') != ''
     assert extension('archive.tar.gz') == 'gz'
     assert extension('audio.m4a') == 'm4a'
 
-def test_lowercast_ext():
+
+def test_lowercast_ext() -> None:
     """
     Test lowercase extension utility.
     """
@@ -40,7 +43,8 @@ def test_lowercast_ext():
     assert lowercase_ext('audio.m4a') == 'audio.m4a'
     assert lowercase_ext('AUDIO.M4A') == 'AUDIO.m4a'
 
-def test_add_slash():
+
+def test_add_slash() -> None:
     """
     Test add slash utility.
     """
@@ -53,7 +57,8 @@ def test_add_slash():
     assert (addslash('http://localhost/uploads/') ==
             'http://localhost/uploads/')
 
-def test_custom_iterables():
+
+def test_custom_iterables() -> None:
     """
     Test `ALL` and `AllExcept`.
     """

@@ -1,10 +1,11 @@
 """
-Test Quart-Uploads Configuration.
+tests.test_config
 """
 import os
 import pytest
 from quart import Quart
-from quart_uploads import configure_uploads, UploadConfiguration, UploadSet
+from quart_uploads import configure_uploads, UploadConfig, UploadSet, Uploads
+
 
 @pytest.fixture
 def app() -> Quart:
@@ -16,15 +17,19 @@ def app() -> Quart:
     app.config['TESTING'] = True
     return app
 
-def configure(app: Quart, *sets, **options):
+
+def configure(
+        app: Quart, *sets: UploadSet, **options: str
+) -> Uploads:
     """
     Configures the sets for the tests.
     """
     app.config.update(options)
     configure_uploads(app, sets)
-    return app.upload_set_config
+    return app.extensions['uploads']
 
-def test_manual(app):
+
+def test_manual(app: Quart) -> None:
     """
     Tests configuration for manually serving the files.
     """
@@ -34,18 +39,19 @@ def test_manual(app):
         app,
         files,
         photos,
-        UPLOADED_FILES_DEST = '/var/files',
-        UPLOADED_FILES_URL = 'http://localhost:6001/',
-        UPLOADED_PHOTOS_DEST = '/mnt/photos',
-        UPLOADED_PHOTOS_URL = 'http://localhost:6002/'
+        UPLOADED_FILES_DEST='/var/files',
+        UPLOADED_FILES_URL='http://localhost:6001/',
+        UPLOADED_PHOTOS_DEST='/mnt/photos',
+        UPLOADED_PHOTOS_URL='http://localhost:6002/'
     )
 
     file_conf = set_config['files']
     photos_conf = set_config['photos']
-    assert file_conf == UploadConfiguration('/var/files', 'http://localhost:6001/')
-    assert photos_conf == UploadConfiguration('/mnt/photos', 'http://localhost:6002/')
+    assert file_conf == UploadConfig('/var/files', 'http://localhost:6001/')
+    assert photos_conf == UploadConfig('/mnt/photos', 'http://localhost:6002/')
 
-def test_self_serve(app):
+
+def test_self_serve(app: Quart) -> None:
     """
     Tests configuration for self serving the files.
     """
@@ -55,16 +61,17 @@ def test_self_serve(app):
         app,
         files,
         photos,
-        UPLOADED_FILES_DEST = '/var/files',
-        UPLOADED_PHOTOS_DEST = '/mnt/photos',
+        UPLOADED_FILES_DEST='/var/files',
+        UPLOADED_PHOTOS_DEST='/mnt/photos'
     )
 
     file_conf, photos_conf = set_config['files'], set_config['photos']
 
-    assert file_conf == UploadConfiguration('/var/files', None)
-    assert photos_conf == UploadConfiguration('/mnt/photos', None)
+    assert file_conf == UploadConfig('/var/files', None)
+    assert photos_conf == UploadConfig('/mnt/photos', None)
 
-def test_defaults(app):
+
+def test_defaults(app: Quart) -> None:
     """
     Tests default configuration.
     """
@@ -74,18 +81,21 @@ def test_defaults(app):
         app,
         files,
         photos,
-        UPLOADS_DEFAULT_DEST = '/var/uploads',
-        UPLOADS_DEFAULT_URL = 'http://localhost:6000/',
+        UPLOADS_DEFAULT_DEST='/var/uploads',
+        UPLOADS_DEFAULT_URL='http://localhost:6000/',
     )
 
     file_conf, photos_conf = set_config['files'], set_config['photos']
 
-    assert file_conf == UploadConfiguration('/var/uploads/files',
-                                            'http://localhost:6000/files/')
-    assert photos_conf == UploadConfiguration('/var/uploads/photos',
-                                              'http://localhost:6000/photos/')
+    assert file_conf == UploadConfig(
+        '/var/uploads/files', 'http://localhost:6000/files/'
+        )
+    assert photos_conf == UploadConfig(
+        '/var/uploads/photos', 'http://localhost:6000/photos/'
+        )
 
-def test_default_self_serve(app):
+
+def test_default_self_serve(app: Quart) -> None:
     """
     Tests default configuration for self serving the files.
     """
@@ -95,15 +105,16 @@ def test_default_self_serve(app):
         app,
         files,
         photos,
-        UPLOADS_DEFAULT_DEST = '/var/uploads'
+        UPLOADS_DEFAULT_DEST='/var/uploads'
     )
 
     file_conf, photos_conf = set_config['files'], set_config['photos']
 
-    assert file_conf == UploadConfiguration('/var/uploads/files', None)
-    assert photos_conf == UploadConfiguration('/var/uploads/photos', None)
+    assert file_conf == UploadConfig('/var/uploads/files', None)
+    assert photos_conf == UploadConfig('/var/uploads/photos', None)
 
-def test_mixed_defaults(app):
+
+def test_mixed_defaults(app: Quart) -> None:
     """
     Tests configuration default and set specific configuration.
     """
@@ -113,18 +124,23 @@ def test_mixed_defaults(app):
         app,
         files,
         photos,
-        UPLOADS_DEFAULT_DEST = '/var/uploads',
-        UPLOADS_DEFAULT_URL = 'http://localhost:6001/',
-        UPLOADED_PHOTOS_DEST = '/mnt/photos/',
-        UPLOADED_PHOTOS_URL = 'http://localhost:6002/'
+        UPLOADS_DEFAULT_DEST='/var/uploads',
+        UPLOADS_DEFAULT_URL='http://localhost:6001/',
+        UPLOADED_PHOTOS_DEST='/mnt/photos/',
+        UPLOADED_PHOTOS_URL='http://localhost:6002/'
     )
 
     file_conf, photos_conf = set_config['files'], set_config['photos']
 
-    assert file_conf == UploadConfiguration('/var/uploads/files','http://localhost:6001/files/')
-    assert photos_conf == UploadConfiguration('/mnt/photos/', 'http://localhost:6002/')
+    assert file_conf == UploadConfig(
+        '/var/uploads/files', 'http://localhost:6001/files/'
+        )
+    assert photos_conf == UploadConfig(
+        '/mnt/photos/', 'http://localhost:6002/'
+        )
 
-def test_default_dest_callables(app):
+
+def test_default_dest_callables(app: Quart) -> None:
     """
     Tests default destination as a callable.
     """
@@ -136,12 +152,14 @@ def test_default_dest_callables(app):
         app,
         files,
         photos,
-        INSTANCE = '/home/me/webapps/thisapp',
-        UPLOADED_PHOTOS_DEST = '/mnt/photos/',
-        UPLOADED_PHOTOS_URL = 'http://localhost:6002/'
+        INSTANCE='/home/me/webapps/thisapp',
+        UPLOADED_PHOTOS_DEST='/mnt/photos/',
+        UPLOADED_PHOTOS_URL='http://localhost:6002/'
     )
 
     file_conf, photos_conf = set_config['files'], set_config['photos']
 
-    assert file_conf == UploadConfiguration('/home/me/webapps/thisapp/files', None)
-    assert photos_conf == UploadConfiguration('/mnt/photos/', 'http://localhost:6002/')
+    assert file_conf == UploadConfig('/home/me/webapps/thisapp/files', None)
+    assert photos_conf == UploadConfig(
+        '/mnt/photos/', 'http://localhost:6002/'
+        )
