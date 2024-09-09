@@ -5,7 +5,7 @@ Provides the quart route for the extension. The route is used to serve files.
 """
 from quart import abort, Blueprint, current_app, Response, send_from_directory
 
-from .core import Uploads
+from .config import Uploads
 
 
 uploads_mod = Blueprint('_uploads', __name__, url_prefix='/_uploads')
