@@ -19,8 +19,7 @@ from .file_ext import FILE_EXTENSIONS as FE, All
 from .utils import extension, lowercase_ext
 
 if TYPE_CHECKING:
-    from .core import Uploads
-    from .config import UploadConfig
+    from .config import Uploads, UploadConfig
 
 
 class UploadSet(object):
