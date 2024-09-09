@@ -9,7 +9,7 @@ import pathlib
 import posixpath
 from typing import Callable, Optional, Tuple, Union, TYPE_CHECKING
 
-import aiofiles
+import aiofiles.os
 from quart import Quart, current_app, url_for
 from quart.datastructures import FileStorage
 from werkzeug.utils import secure_filename
