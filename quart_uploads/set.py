@@ -186,7 +186,6 @@ class UploadSet(object):
             basename = await self.resolve_conflict(target_folder, basename)
 
         target = os.path.join(target_folder, basename)
-        target = pathlib.Path(target)
 
         await storage.save(target)
 

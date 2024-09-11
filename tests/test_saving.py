@@ -22,7 +22,7 @@ async def test_saved(tmp_path: Path) -> None:
     tfs = TestingFileStorage(filename='foo.txt')
     res = await uset.save(tfs)
     assert res == 'foo.txt'
-    assert tfs.saved == os.path.join(directory, "foo.txt")
+    assert tfs.saved == os.path.join(dest, "foo.txt")
 
 
 @pytest.mark.asyncio
