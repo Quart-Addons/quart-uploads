@@ -9,15 +9,14 @@ from __future__ import annotations
 import os
 from collections import UserDict
 from dataclasses import dataclass, astuple
-from typing import Any, Dict, Optional, Union, TYPE_CHECKING
+from typing import Any, Dict, Optional, Union
 
 from quart import Quart
 
 from .route import uploads_mod
+from .set import UploadSet
 from .utils import addslash
 
-if TYPE_CHECKING:
-    from .set import UploadSet
 
 @dataclass
 class UploadConfig:
