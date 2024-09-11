@@ -12,6 +12,9 @@ from werkzeug.datastructures import Headers
 def extension(filename: str) -> str:
     """
     Returns the extension used for a file.
+
+    Arguments:
+        filename: The filename to get the extension.
     """
     ext = os.path.splitext(filename)[1]
     if ext == '':
@@ -29,7 +32,8 @@ def lowercase_ext(filename: str) -> str:
     all processed files, to compare with configured extensions in the same
     case.
 
-    :param filename: The filename to ensure has a lowercase extension.
+    Arguments:
+        filename: The filename to ensure has a lowercase extension.
     """
     if '.' in filename:
         main, ext = os.path.splitext(filename)
@@ -43,6 +47,9 @@ def lowercase_ext(filename: str) -> str:
 def addslash(url: str) -> str:
     """
     Adds an end slash to a url.
+
+    argument:
+        url: The url to add an end slash to.
     """
     if url.endswith('/'):
         return url
@@ -56,15 +63,16 @@ class TestingFileStorage(FileStorage):
     to the name of the file it was saved to. All of these parameters are
     optional, so only bother setting the ones relevant to your application.
 
-    :param stream: A stream. The default is an empty stream.
-    :param filename: The filename uploaded from the client. The default is the
-        stream's name.
-    :param name: The name of the form field it was loaded from. The default is
-        `None`.
-    :param content_type: The content type it was uploaded as. The default is
-        ``application/octet-stream``.
-    :param content_length: How long it is. The default is -1.
-    :param headers: Multipart headers as a `werkzeug.Headers`. The default is
+    Arguments:
+        stream: A stream. The default is an empty stream.
+        filename: The filename uploaded from the client. The default is the
+            stream's name.
+        name: The name of the form field it was loaded from. The default is
+            `None`.
+        content_type: The content type it was uploaded as. The default is
+            ``application/octet-stream``.
+        content_length: How long it is. The default is -1.
+        headers: Multipart headers as a `werkzeug.Headers`. The default is
         `None`.
     """
     def __init__(
@@ -87,8 +95,9 @@ class TestingFileStorage(FileStorage):
         This marks the file as saved by setting the `saved` attribute to the
         name of the file it was saved to.
 
-        :param destination: The file to save to.
-        :param buffer_size: Ignored.
+        Arguments:
+            :destination: The file to save to.
+            :buffer_size: Ignored.
         """
         await asyncio.sleep(0.2)
 

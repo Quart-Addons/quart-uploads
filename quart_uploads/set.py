@@ -5,7 +5,6 @@ Defines the upload set class.
 """
 from __future__ import annotations
 import os
-import pathlib
 import posixpath
 from typing import Callable, Optional, Tuple, Union, TYPE_CHECKING
 
@@ -80,7 +79,8 @@ class UploadSet(object):
         This function gets the URL a file uploaded to this set would be
         accessed at. It doesn't check whether said file exists.
 
-        :param filename: The filename to return the URL for.
+        Arguments:
+            filename: The filename to return the URL for.
         """
         base = self.config.base_url
         if base is None:
@@ -94,8 +94,9 @@ class UploadSet(object):
         This returns the absolute path of a file uploaded to this set. It
         doesn't actually check whether said file exists.
 
-        :param filename: The filename to return the path for.
-        :param folder: The subfolder within the upload set previously
+        Arguments:
+            filename: The filename to return the path for.
+            folder: The subfolder within the upload set previously
                        used to save to.
         """
 
@@ -112,8 +113,9 @@ class UploadSet(object):
         basename, and `False` if it can't. The default implementation just
         checks the extension, so you can override this if you want.
 
-        :param storage: The `werkzeug.FileStorage` to check.
-        :param basename: The basename it will be saved under.
+        Arguments:
+            storage: The `werkzeug.FileStorage` to check.
+            basename: The basename it will be saved under.
         """
         return self.extension_allowed(extension(basename))
 
@@ -123,7 +125,8 @@ class UploadSet(object):
         by `file_allowed`, so if you override that but still want to check
         extensions, call back into this.
 
-        :param ext: The extension to check, without the dot.
+        Arguments:
+            ext: The extension to check, without the dot.
         """
         return ((ext in self.config.allow) or
                 (ext in self.extensions and ext not in self.config.deny))
@@ -146,13 +149,14 @@ class UploadSet(object):
         raised. Otherwise, the file will be saved and its name (including
         the folder) will be returned.
 
-        :param storage: The uploaded file to save.
-        :param folder: The subfolder within the upload set to save to.
-        :param name: The name to save the file as. If it ends with a dot, the
-            file's extension will be appended to the end. (If you
-            are using `name`, you can include the folder in the
-            `name` instead of explicitly using `folder`, i.e.
-            ``uset.save(file, name="someguy/photo_123.")``
+        Arguments:
+            storage: The uploaded file to save.
+            folder: The subfolder within the upload set to save to.
+            name: The name to save the file as. If it ends with a dot, the
+                file's extension will be appended to the end. (If you
+                are using `name`, you can include the folder in the
+                `name` instead of explicitly using `folder`, i.e.
+                ``uset.save(file, name="someguy/photo_123.")``
         """
 
         if not isinstance(storage, FileStorage):
@@ -204,8 +208,9 @@ class UploadSet(object):
         suffix to the name consisting of an underscore and a number, and tries
         that until it finds one that doesn't exist.
 
-        :param target_folder: The absolute path to the target.
-        :param basename: The file's original basename.
+        Arguments:
+            target_folder: The absolute path to the target.
+            basename: The file's original basename.
         """
         name, ext = os.path.splitext(basename)
         count = 0
