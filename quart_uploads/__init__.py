@@ -21,11 +21,3 @@ __all__ = [
     'UploadSet',
     'TestingFileStorage'
     ]
-
-"""
-__version_info__ = (0, 0, 1)
-__version__ = '.'.join(__version_info__)
-__author__ = 'Chris Rood'
-__license__ = 'MIT'
-__copyright__ = '(c) 2022 by Chris Rood'
-"""
