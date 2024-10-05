@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "quart-uploads"
-version = "0.0.3"
+version = "0.0.4"
 description = ""
 authors = ["Chris Rood <quart.addons@gmail.com>"]
 license = "MIT"
@@ -26,6 +26,7 @@ repository = "https://github.com/Quart-Addons/quart-uploads"
 documentation = "https://quart-uploads.readthedocs.io/"
 packages = [
     { include = "quart_uploads"},
+    { include = "quart_uploads/py.typed"}
 ]
 
 [tool.poetry.dependencies]

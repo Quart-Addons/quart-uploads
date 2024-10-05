@@ -9,7 +9,7 @@
 project = 'Quart-Uploads'
 copyright = '2022, Chris Rood'
 author = 'Chris Rood'
-release = '0.0.3'
+release = '0.0.4'
 version = release
 
 # -- General configuration ---------------------------------------------------
