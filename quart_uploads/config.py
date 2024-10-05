@@ -158,9 +158,9 @@ def configure_uploads(
         upload_sets = (upload_sets,)
 
     if 'uploads' not in app.extensions:
-        Uploads(app)
-
-    uploads: Uploads = app.extensions['uploads']
+        uploads = Uploads(app)
+    else:
+        uploads = app.extensions['uploads']
 
     defaults = {
         "dest": app.config.get('UPLOADS_DEFAULT_DEST'),
