@@ -85,7 +85,7 @@ script, by adding the following to *pyproject.toml*:
 .. code-block:: toml
     :caption: pyproject.toml
 
-    [toll.poetry.scripts]
+    [tool.poetry.scripts]
     start = "photolog:run"
 
 Which allows the following command to start the app:
