@@ -21,7 +21,7 @@ if TYPE_CHECKING:
     from .config import Uploads, UploadConfig
 
 
-class UploadSet(object):
+class UploadSet:
     """
     This represents a single set of uploaded files. Each upload set is
     independent of the others. This can be reused across multiple application
