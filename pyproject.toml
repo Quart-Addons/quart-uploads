@@ -30,7 +30,7 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.8"
+python = ">=3.9"
 aiofiles = ">=24.0.0"
 quart = ">=0.19"
 types-aiofiles = "*"
