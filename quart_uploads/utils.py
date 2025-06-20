@@ -89,7 +89,7 @@ class TestingFileStorage(FileStorage):
         self.saved: Any | None = None
 
     async def save(
-            self, destination: Any, buffer_size: int = 16384
+            self, destination: os.PathLike, buffer_size: int = 16384
     ) -> None:
         """
         This marks the file as saved by setting the `saved` attribute to the
@@ -105,3 +105,4 @@ class TestingFileStorage(FileStorage):
             self.saved = destination
         else:
             self.saved = destination.name
+        return
