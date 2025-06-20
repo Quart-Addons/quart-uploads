@@ -96,7 +96,7 @@ class FileExtensions:
 FILE_EXTENSIONS = FileExtensions()
 
 
-class All(object):
+class All:
     """
     This type can be used to allow all extensions. There is a predefined
     instance named `ALL`.
