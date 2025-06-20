@@ -6,7 +6,15 @@ Defines the upload set class.
 from __future__ import annotations
 import os
 import posixpath
-from typing import Callable, Optional, Tuple, Union, TYPE_CHECKING
+
+from typing import (
+    Callable,
+    LiteralString,
+    Optional,
+    Tuple,
+    Union,
+    TYPE_CHECKING
+)
 
 import aiofiles.os
 from quart import Quart, current_app, url_for
@@ -46,7 +54,7 @@ class UploadSet:
     def __init__(
         self,
         name: str = 'files',
-        extensions: Union[Tuple[str], All] = FE.Defaults,
+        extensions: Union[Tuple[str], Tuple[LiteralString], All] = FE.Defaults,
         default_dest: Optional[Union[str, Callable[[Quart], str]]] = None
     ) -> None:
         if not name.isalnum():
