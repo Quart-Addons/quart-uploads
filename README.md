@@ -1,6 +1,9 @@
 Quart Uploads
 =============
 
+> [!WARNING]
+> This package is no longer being maintained or developed.
+
 ![Quart Uploads Logo](logos/logo.png)
 
 Quart-Uploads allows your application to flexibly and efficiently handle file
